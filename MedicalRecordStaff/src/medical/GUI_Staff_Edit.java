@@ -27,6 +27,8 @@ import javax.swing.JRadioButton;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GUI_Staff_Edit extends JFrame {
 
@@ -80,7 +82,7 @@ public class GUI_Staff_Edit extends JFrame {
 		lblFisrtName.setBounds(10, 52, 102, 16);
 		panel_1.add(lblFisrtName);
 		
-		JLabel lblCAddress = new JLabel("Address:");
+		JLabel lblCAddress = new JLabel("Email:");
 		lblCAddress.setFont(new Font("Calibri", Font.PLAIN, 14));
 		lblCAddress.setBounds(10, 90, 102, 16);
 		panel_1.add(lblCAddress);
@@ -130,34 +132,62 @@ public class GUI_Staff_Edit extends JFrame {
 		pass.setBounds(105, 205, 231, 28);
 		panel_1.add(pass);
 		
-		JRadioButton rdbtnHealthService = new JRadioButton("Health Service");
-		rdbtnHealthService.setFont(new Font("Calibri", Font.PLAIN, 14));
-		rdbtnHealthService.setBounds(370, 120, 109, 23);
-		panel_1.add(rdbtnHealthService);
+		JRadioButton hea = new JRadioButton("Health Service");
+		hea.setFont(new Font("Calibri", Font.PLAIN, 14));
+		hea.setBounds(370, 120, 109, 23);
+		panel_1.add(hea);
 		
-		JRadioButton rdbtnReceptionist = new JRadioButton("Receptionist");
-		rdbtnReceptionist.setFont(new Font("Calibri", Font.PLAIN, 14));
-		rdbtnReceptionist.setBounds(370, 85, 109, 23);
-		panel_1.add(rdbtnReceptionist);
+		JRadioButton rec = new JRadioButton("Receptionist");
+		rec.setFont(new Font("Calibri", Font.PLAIN, 14));
+		rec.setBounds(370, 85, 109, 23);
+		panel_1.add(rec);
 		
-		JRadioButton rdbtnNurse = new JRadioButton("Nurse");
-		rdbtnNurse.setFont(new Font("Calibri", Font.PLAIN, 14));
-		rdbtnNurse.setBounds(370, 49, 109, 23);
-		panel_1.add(rdbtnNurse);
+		JRadioButton nur = new JRadioButton("Nurse");
+		nur.setFont(new Font("Calibri", Font.PLAIN, 14));
+		nur.setBounds(370, 49, 109, 23);
+		panel_1.add(nur);
 		
-		JRadioButton rdbtnDoctor = new JRadioButton("Doctor");
-		rdbtnDoctor.setFont(new Font("Calibri", Font.PLAIN, 14));
-		rdbtnDoctor.setBounds(370, 15, 109, 23);
-		panel_1.add(rdbtnDoctor);
+		JRadioButton doc = new JRadioButton("Doctor");
+		doc.setFont(new Font("Calibri", Font.PLAIN, 14));
+		doc.setBounds(370, 15, 109, 23);
+		panel_1.add(doc);
 		
 		ButtonGroup group = new ButtonGroup();
-        group.add(rdbtnHealthService);
-        group.add(rdbtnReceptionist);
-        group.add(rdbtnNurse);
-        group.add(rdbtnDoctor);
+        group.add(hea);
+        group.add(rec);
+        group.add(nur);
+        group.add(doc);
         
         
         JButton Bsave= new JButton("Save");
+        Bsave.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		int s_id=Integer.parseInt(staffID.getText());
+				String s_name=name.getText();
+				String s_email=address.getText();
+				String s_clinic=clinic.getText();
+				String s_user=user.getText();
+				String s_pass=pass.getText();
+				int s_doc=0,s_rec=0,s_nur=0,s_hea=0;
+				if(doc.isSelected())
+					s_doc=1;
+				if(rec.isSelected())
+					s_rec=1;
+				if(nur.isSelected())
+					s_nur=1;
+				if(hea.isSelected())
+					s_hea=1;
+				
+				
+				
+				
+				
+				//System.out.println(s_id+" "+s_name+" "+s_email+" "+s_clinic+" "+s_user+" "+s_pass+" "+s_doc+" "+
+				//s_rec+" "+s_nur+" "+s_hea);
+        		
+        	}
+        });
         Bsave.setFont(new Font("Calibri", Font.PLAIN, 14));
         Bsave.setBounds(370, 208, 109, 23);
 		panel_1.add(Bsave);
