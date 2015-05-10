@@ -84,8 +84,7 @@ public class doctorFunctionImpl implements doctorFunctions {
 	}
 
 	@Override
-	public boolean updateRandevou(int randevou_id, String Condition, int Medication, String comments,
-			int overule, int lm, int dead, int sh, int patient_id) {
+	public boolean updateRandevou(int randevou_id, String Condition, int Medication, String comments,int overule, int lm, int dead, int sh, int patient_id) {
 		// TODO Auto-generated method stub
 		try {
 			connectDB connection = new connectDB();
@@ -93,9 +92,6 @@ public class doctorFunctionImpl implements doctorFunctions {
 					"', Overule = "+overule+ " , Updated = "+1+" WHERE Randevou_ID = "+randevou_id+";";
 					System.out.println(query1);
 			connection.stmt.executeUpdate(query1); 
-			
-			String query2 = "UPDATE patients SET Madness_level = "+lm+", Dead = "+dead+", Self_harm = "+sh+" WHERE Patient_ID="+patient_id;
-			connection.stmt.executeUpdate(query2); 
 		}catch(SQLException se){
 		      //Handle errors for JDBC
 		      se.printStackTrace();
@@ -158,7 +154,7 @@ public class doctorFunctionImpl implements doctorFunctions {
 		} catch (Exception ex) {
 			System.out.println("ERROR" + ex);
 		};
-		return "";
+		return null;
 	}
 
 

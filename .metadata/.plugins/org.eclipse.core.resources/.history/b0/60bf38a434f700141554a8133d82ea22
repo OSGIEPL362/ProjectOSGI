@@ -14,7 +14,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
@@ -29,9 +28,6 @@ import doctorFactory.doctorServiceFactory;
 import doctorsModel.doctorFunctions;
 
 import javax.swing.JTable;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class patient_record_gui extends JFrame {
 
@@ -190,48 +186,11 @@ public class patient_record_gui extends JFrame {
 		textArea.setText(cond_med[0]);
 		panel_1.add(textArea);
 		
-		
 		JButton btnCheckForAllergies = new JButton("Check for Allergies");
-		btnCheckForAllergies.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				doctorFunctions factory1 = doctorServiceFactory.getFactory();
-				final int med_id = Integer.parseInt(textField.getText()); 
-				final int pet_id = Integer.parseInt(textField_1.getText());
-			 	String details = factory1.checkForAllergies(pet_id, med_id);
-			 	
-			 	if (details.equals("")){
-			 		JOptionPane.showMessageDialog(null, "No Allergy.");
-			 		
-			 	}else{
-			 		JOptionPane.showMessageDialog(null,
-			 				"There is an allergy in this drug.\n" +details ,
-			 			    "Allergy Detecte",
-			 			    JOptionPane.ERROR_MESSAGE);
-					
-			 	}
-			}
-		});
 		btnCheckForAllergies.setBounds(266, 369, 151, 23);
 		panel_1.add(btnCheckForAllergies);
 		
 		JButton btnUpdate = new JButton("Update");
-		btnUpdate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				doctorFunctions factory1 = doctorServiceFactory.getFactory();
-				final int med_id = Integer.parseInt(textField.getText()); 
-				final int pet_id = Integer.parseInt(textField_1.getText());
-			 	String details = factory1.checkForAllergies(pet_id, med_id);
-			 	int overrule = -1;
-			 	if (details.equals("")){
-			 		overrule = 0;			 		
-			 	}else{
-			 		overrule = 1;
-			 	}
-			 	
-			 	//comboBox.getSelectetIndex();
-			 	
-			}
-		});
 		btnUpdate.setBounds(125, 492, 89, 23);
 		panel_1.add(btnUpdate);
 		

@@ -228,7 +228,7 @@ public class patient_record_gui extends JFrame {
 			 		overrule = 1;
 			 	}
 			 	
-			 	//comboBox.getSelectetIndex();
+			 	comboBox.getSelectetIndex();
 			 	
 			}
 		});

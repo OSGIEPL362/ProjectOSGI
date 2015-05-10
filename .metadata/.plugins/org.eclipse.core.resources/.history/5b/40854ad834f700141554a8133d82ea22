@@ -22,9 +22,6 @@ import javax.swing.JTable;
 import doctorFactory.doctorServiceFactory;
 import doctorsModel.doctorFunctions;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 public class Doctor_Rantevous extends JFrame {
 
 	private JPanel contentPane;
@@ -121,18 +118,6 @@ public class Doctor_Rantevous extends JFrame {
 		textField.setColumns(10);
 		
 		JButton btnGoGoCoco = new JButton("Go Go Coco");
-		btnGoGoCoco.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				final int id = Integer.parseInt(textField.getText()); 
-				try {
-					patient_record_gui frame = new patient_record_gui(id);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				
-			}
-		});
 		btnGoGoCoco.setBounds(352, 291, 101, 23);
 		panel_1.add(btnGoGoCoco);
 	}
