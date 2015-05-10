@@ -26,6 +26,7 @@ import javax.swing.JButton;
 
 
 
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -34,18 +35,18 @@ import java.awt.event.MouseEvent;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
 public class GUI_Patients_Edit extends JFrame {
 
 	private JPanel contentPane;
-	public JTextField patientID;
+	public JTextField pid;
 	public JTextField name;
 	public JTextField address;
-	public JTextField realative_phone;
-	private static int insert;
-
+	public JTextField email;
+	private JComboBox combo;
 	/**
 	 * Launch the application.
 	 */
@@ -98,16 +99,16 @@ public class GUI_Patients_Edit extends JFrame {
 		lblLevelOfMadness.setBounds(10, 131, 120, 16);
 		panel_1.add(lblLevelOfMadness);
 		
-		JLabel lblRealatives = new JLabel("Realative Phone:");
+		JLabel lblRealatives = new JLabel("Realative Email:");
 		lblRealatives.setFont(new Font("Calibri", Font.PLAIN, 14));
 		lblRealatives.setBounds(10, 169, 120, 16);
 		panel_1.add(lblRealatives);
 		
-		patientID = new JTextField();
-		patientID.setEditable(false);
-		patientID.setColumns(10);
-		patientID.setBounds(140, 11, 196, 28);
-		panel_1.add(patientID);
+		pid = new JTextField();
+		pid.setEditable(false);
+		pid.setColumns(10);
+		pid.setBounds(140, 11, 196, 28);
+		panel_1.add(pid);
 		
 		name = new JTextField();
 		name.setColumns(10);
@@ -119,30 +120,35 @@ public class GUI_Patients_Edit extends JFrame {
 		address.setBounds(140, 84, 196, 28);
 		panel_1.add(address);
 		
-		realative_phone = new JTextField();
-		realative_phone.setColumns(10);
-		realative_phone.setBounds(140, 163, 196, 28);
-		panel_1.add(realative_phone);
+		email = new JTextField();
+		email.setColumns(10);
+		email.setBounds(140, 163, 196, 28);
+		panel_1.add(email);
 		
-		JRadioButton rdbtnYes = new JRadioButton("Yes");
-		rdbtnYes.setFont(new Font("Calibri", Font.PLAIN, 14));
-		rdbtnYes.setBounds(183, 262, 109, 23);
-		panel_1.add(rdbtnYes);
+		JRadioButton dead = new JRadioButton("Yes");
+		dead.setFont(new Font("Calibri", Font.PLAIN, 14));
+		dead.setBounds(183, 262, 109, 23);
+		panel_1.add(dead);
 		
-		JRadioButton rdbtnYes_1 = new JRadioButton("Yes");
-		rdbtnYes_1.setFont(new Font("Calibri", Font.PLAIN, 14));
-		rdbtnYes_1.setBounds(10, 262, 109, 23);
-		panel_1.add(rdbtnYes_1);
+		JRadioButton harm = new JRadioButton("Yes");
+		harm.setFont(new Font("Calibri", Font.PLAIN, 14));
+		harm.setBounds(10, 262, 109, 23);
+		panel_1.add(harm);
 		
 		JButton button = new JButton("Save");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-//					insert=Integer.parseInt(mad_lvl.getText());
-//					System.out.println(insert);
-					//ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY
-					//stmt = conn.createStatement	();
-					//ResultSet srs =	stmt.executeQuery("SELECT * FROM CUSTOMERS");					
+					int p_id=Integer.parseInt(pid.getText());
+					String p_name=name.getText();
+					String p_addr=address.getText();
+					int p_lvl=combo.getSelectedIndex() +1;
+					String p_email=email.getText();
+					int p_harm=0,p_dead=0;
+					if(harm.isSelected())
+						p_harm=1;
+					if(dead.isSelected())
+						p_dead=1;					
 					
 				}
 				
@@ -191,9 +197,9 @@ public class GUI_Patients_Edit extends JFrame {
 		btnBack.setBounds(383, 202, 109, 23);
 		panel_1.add(btnBack);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
-		comboBox.setBounds(140, 129, 70, 20);
-		panel_1.add(comboBox);
+		combo = new JComboBox();
+		combo.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+		combo.setBounds(140, 129, 70, 20);
+		panel_1.add(combo);
 	}
 }
