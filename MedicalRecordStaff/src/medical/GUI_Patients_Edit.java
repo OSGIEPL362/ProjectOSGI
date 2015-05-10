@@ -140,18 +140,24 @@ public class GUI_Patients_Edit extends JFrame {
 		name.setColumns(10);
 		name.setBounds(140, 45, 196, 28);
 		name.setText(name1);
+		if (d == 1)
+			name.setEditable(false);
 		panel_1.add(name);
 		
 		address = new JTextField();
 		address.setColumns(10);
 		address.setBounds(140, 84, 196, 28);
 		address.setText(addr);
+		if (d == 1)
+			address.setEnabled(false);
 		panel_1.add(address);
 		
 		email = new JTextField();
 		email.setColumns(10);
 		email.setBounds(140, 163, 196, 28);
 		email.setText(email1);
+		if (d == 1)
+			email.setEnabled(false);
 		panel_1.add(email);
 		
 		JRadioButton dead = new JRadioButton("Yes");
@@ -162,9 +168,12 @@ public class GUI_Patients_Edit extends JFrame {
 		}else{
 			dead.setSelected(true);
 		}
+		if (d == 1)
+			dead.setEnabled(false);
 		panel_1.add(dead);
 		
 		JRadioButton harm = new JRadioButton("Yes");
+		
 		harm.setFont(new Font("Calibri", Font.PLAIN, 14));
 		harm.setBounds(10, 262, 109, 23);
 		if(sh == 0){
@@ -172,6 +181,8 @@ public class GUI_Patients_Edit extends JFrame {
 		}else{
 			harm.setSelected(true);
 		}
+		if (d == 1)
+			harm.setEnabled(false);
 		panel_1.add(harm);
 		
 		JButton button = new JButton("Save");
@@ -252,6 +263,9 @@ public class GUI_Patients_Edit extends JFrame {
 		combo.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
 		combo.setBounds(140, 129, 70, 20);
 		combo.setSelectedIndex(lm-1);
+		if (d == 1)
+			combo.setEnabled(false);
+		
 		panel_1.add(combo);
 	}
 }

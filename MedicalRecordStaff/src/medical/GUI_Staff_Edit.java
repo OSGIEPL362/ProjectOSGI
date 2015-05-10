@@ -18,12 +18,16 @@ import javax.swing.JTextArea;
 import java.awt.Font;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.Icon;
 import javax.swing.JRadioButton;
+
+import medicalFactory.medicalServiceFactory;
+import medicalModel.medicalFunctions;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -152,11 +156,16 @@ public class GUI_Staff_Edit extends JFrame {
 		doc.setBounds(370, 15, 109, 23);
 		panel_1.add(doc);
 		
+		JRadioButton man = new JRadioButton("Manager");
+		man.setBounds(370, 159, 109, 23);
+		panel_1.add(man);
+		
 		ButtonGroup group = new ButtonGroup();
         group.add(hea);
         group.add(rec);
         group.add(nur);
         group.add(doc);
+        group.add(man);
         
         
         JButton Bsave= new JButton("Save");
@@ -169,7 +178,7 @@ public class GUI_Staff_Edit extends JFrame {
 				String s_clinic=clinic.getText();
 				String s_user=user.getText();
 				String s_pass=pass.getText();
-				int s_doc=0,s_rec=0,s_nur=0,s_hea=0;
+				int s_doc=0,s_rec=0,s_nur=0,s_hea=0, s_man=0;
 				if(doc.isSelected())
 					s_doc=1;
 				if(rec.isSelected())
@@ -178,9 +187,21 @@ public class GUI_Staff_Edit extends JFrame {
 					s_nur=1;
 				if(hea.isSelected())
 					s_hea=1;
+				if(man.isSelected())
+					s_man=1;
 				
+medicalFunctions factory = medicalServiceFactory.getFactory();
 				
-				
+				if (factory.addStaff(s_id, s_name,  s_email, s_clinic, s_user, s_pass, s_doc,s_nur ,s_rec ,s_hea,s_man)){
+					JOptionPane.showMessageDialog(null, "New Staff Added!");
+					General frame = new General(ID);
+					frame.setVisible(true);
+					setVisible(false);
+				}else{
+					JOptionPane.showMessageDialog(null,"Erron! Could not add staff",
+						    "Insert error",
+						    JOptionPane.ERROR_MESSAGE);
+				}
 				
 				
 				//System.out.println(s_id+" "+s_name+" "+s_email+" "+s_clinic+" "+s_user+" "+s_pass+" "+s_doc+" "+
@@ -189,7 +210,7 @@ public class GUI_Staff_Edit extends JFrame {
         	}
         });
         Bsave.setFont(new Font("Calibri", Font.PLAIN, 14));
-        Bsave.setBounds(370, 208, 109, 23);
+        Bsave.setBounds(370, 229, 109, 23);
 		panel_1.add(Bsave);
 		
 		JButton btnBack = new JButton("Back");
@@ -202,7 +223,7 @@ public class GUI_Staff_Edit extends JFrame {
 			}
 		});
 		btnBack.setFont(new Font("Calibri", Font.PLAIN, 14));
-		btnBack.setBounds(370, 171, 109, 23);
+		btnBack.setBounds(370, 192, 109, 23);
 		panel_1.add(btnBack);
 		
 	}

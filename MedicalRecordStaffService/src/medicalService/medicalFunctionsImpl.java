@@ -34,7 +34,7 @@ public class medicalFunctionsImpl implements  medicalFunctions{
 			String password,int doc, int nurse, int receptionist, int health, int manager){
 		try {
 			connectDB connection = new connectDB();
-			String query1= "INSERT INTO staff (Staff_ID, Name, Address,Clinic_Name, Username, Password, Doctor,Nurse, Receptionist, Manager, Medical)"+
+			String query1= "INSERT INTO staff (Staff_ID, Name, Email,Clinic_Name, Username, Password, Doctor,Nurse, Receptionist, Manager, Medical)"+
 					 " VALUES (" +id+", '"+name+"', '"+Address+"', '"+clinic+"','"+username+"', '"+password+"'," +doc+", "+nurse+","+receptionist+
 					 ","+ health+", "+manager+ " );";
 			System.out.println(query1);
@@ -130,7 +130,7 @@ public class medicalFunctionsImpl implements  medicalFunctions{
 		
 		try {
 			connectDB connection = new connectDB();
-			String query1= "UPDATE staff SET Name ='"+name+"', Address='"+Address+"',Clinic_Name = '"+clinic+"', Username='"+username+
+			String query1= "UPDATE staff SET Name ='"+name+"', Email='"+Address+"',Clinic_Name = '"+clinic+"', Username='"+username+
 					"', Password='"+password+"', Doctor ="+doc+",Nurse="+nurse+", Receptionist= "+receptionist+", Manager="+health+
 					", Medical="+manager+ " WHERE Staff_ID=" +id+";";
 					 System.out.println(query1);
