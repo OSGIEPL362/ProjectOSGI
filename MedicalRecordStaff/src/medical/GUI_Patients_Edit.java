@@ -34,6 +34,8 @@ import java.awt.event.MouseEvent;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class GUI_Patients_Edit extends JFrame {
 
@@ -41,7 +43,6 @@ public class GUI_Patients_Edit extends JFrame {
 	public JTextField patientID;
 	public JTextField name;
 	public JTextField address;
-	public JTextField mad_lvl;
 	public JTextField realative_phone;
 	private static int insert;
 
@@ -118,11 +119,6 @@ public class GUI_Patients_Edit extends JFrame {
 		address.setBounds(140, 84, 196, 28);
 		panel_1.add(address);
 		
-		mad_lvl = new JTextField();
-		mad_lvl.setColumns(10);
-		mad_lvl.setBounds(140, 125, 196, 28);
-		panel_1.add(mad_lvl);
-		
 		realative_phone = new JTextField();
 		realative_phone.setColumns(10);
 		realative_phone.setBounds(140, 163, 196, 28);
@@ -142,8 +138,8 @@ public class GUI_Patients_Edit extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					insert=Integer.parseInt(mad_lvl.getText());
-					System.out.println(insert);
+//					insert=Integer.parseInt(mad_lvl.getText());
+//					System.out.println(insert);
 					//ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY
 					//stmt = conn.createStatement	();
 					//ResultSet srs =	stmt.executeQuery("SELECT * FROM CUSTOMERS");					
@@ -194,5 +190,10 @@ public class GUI_Patients_Edit extends JFrame {
 		btnBack.setFont(new Font("Calibri", Font.PLAIN, 14));
 		btnBack.setBounds(383, 202, 109, 23);
 		panel_1.add(btnBack);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+		comboBox.setBounds(140, 129, 70, 20);
+		panel_1.add(comboBox);
 	}
 }

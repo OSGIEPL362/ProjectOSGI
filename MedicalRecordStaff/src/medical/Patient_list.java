@@ -83,34 +83,30 @@ public class Patient_list extends JFrame {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
+		/*****************************LOAD LIST***************************************/
 		DefaultTableModel model = new DefaultTableModel(0, 0);
 		
 		table.setModel(model);
 		
-		String header[] = new String[] { "ID","Name" };
+		String header[] = new String[] { "Patient ID","Name" };
 		model.setColumnIdentifiers(header);	
-			
-		final ArrayList<Integer> patientID = new ArrayList<Integer>();
-		final ArrayList<String> name = new ArrayList<String>();
 		
 		medicalFunctions factory = medicalServiceFactory.getFactory();	
-		ResultSet rs = factory.getPatients();
+		ResultSet rs = factory.getStaff();
 		
 		try {
 			while (rs.next()) {
-				Integer id = rs.getInt("Patient_ID");
-				patientID.add(id);
+				Integer id = rs.getInt("Staff_ID");
 				String name1 = rs.getString("Name");
-				name.add(name1);
 				model.addRow(new Object[] { id, name1});
-				//String surname = rs.getString("Surname");
-				System.out.println("Patient "+name1 );
+				
 			}
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-			
+		/**************************************************************/
+
 		
 		textField = new JTextField();
 		textField.setColumns(10);
@@ -121,6 +117,7 @@ public class Patient_list extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				final int no = Integer.parseInt(textField.getText()); 
+				
 				
 			}
 		});
