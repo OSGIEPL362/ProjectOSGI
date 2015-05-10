@@ -2,6 +2,7 @@ package medical;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -16,6 +17,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -95,11 +97,16 @@ public class Patient_list extends JFrame {
 		ResultSet rs = factory.getPatients();
 		
 		try {
+			int count=0;
 			while (rs.next()) {
 				Integer id = rs.getInt("Patient_ID");
 				String name1 = rs.getString("Name");
+				int sh = rs.getInt("Self_Harm");
 				model.addRow(new Object[] { id, name1});
 				
+				if (sh == 1){
+					
+				}
 			}
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block

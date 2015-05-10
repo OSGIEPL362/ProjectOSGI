@@ -22,7 +22,7 @@ public class doctor_gui extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		/*EventQueue.invokeLater(new Runnable() {
+		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					doctor_gui frame = new doctor_gui(1111);
@@ -31,7 +31,7 @@ public class doctor_gui extends JFrame {
 					e.printStackTrace();
 				}
 			}
-		});*/
+		});
 	}
 
 	/**
@@ -40,7 +40,7 @@ public class doctor_gui extends JFrame {
 	public doctor_gui(int doctor_id) {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 330, 290);
+		setBounds(100, 100, 330, 314);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -57,7 +57,7 @@ public class doctor_gui extends JFrame {
 		panel_1.setLayout(null);
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 128)));
 		panel_1.setBackground(new Color(173, 216, 230));
-		panel_1.setBounds(10, 27, 280, 204);
+		panel_1.setBounds(10, 27, 284, 228);
 		panel.add(panel_1);
 		
 		JButton btnNewButton = new JButton("Show Rantevous");
@@ -75,7 +75,21 @@ public class doctor_gui extends JFrame {
 		panel_1.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("No update Rantevou");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					noUpdate_Rantevou frame = new noUpdate_Rantevou(doctor_id);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 		btnNewButton_1.setBounds(63, 110, 152, 28);
 		panel_1.add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("Drop In Session");
+		btnNewButton_2.setBounds(63, 167, 152, 28);
+		panel_1.add(btnNewButton_2);
 	}
 }

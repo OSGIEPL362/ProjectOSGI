@@ -25,7 +25,7 @@ import doctorsModel.doctorFunctions;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Doctor_Rantevous extends JFrame {
+public class noUpdate_Rantevou extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -38,7 +38,7 @@ public class Doctor_Rantevous extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Doctor_Rantevous frame = new Doctor_Rantevous(1111);
+					noUpdate_Rantevou frame = new noUpdate_Rantevou(1111);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,7 +50,7 @@ public class Doctor_Rantevous extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Doctor_Rantevous(int doctor_id) {
+	public noUpdate_Rantevou(int doctor_id) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 593, 423);
 		contentPane = new JPanel();
@@ -93,7 +93,8 @@ public class Doctor_Rantevous extends JFrame {
 
 		
 		doctorFunctions factory = doctorServiceFactory.getFactory();
-		ResultSet rs = factory.getRandevous(doctor_id);
+		ResultSet rs = factory.getNotUpdatedRandevous(doctor_id);
+				
 		try {
 			while (rs.next()) {
 				Integer randevou = rs.getInt("Randevou_ID");

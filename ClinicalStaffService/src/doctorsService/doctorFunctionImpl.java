@@ -13,7 +13,8 @@ public class doctorFunctionImpl implements doctorFunctions {
 		// TODO Auto-generated method stub
 		try{
 			connectDB connection = new connectDB();
-			String query = "SELECT * FROM `randevou`, `patients` WHERE randevou.Patient_ID = patients.Patient_ID and randevou.Doctor_ID= "+doctor_id+" ;";
+			String query = "SELECT * FROM `randevou`, `patients` WHERE randevou.Patient_ID = patients.Patient_ID and randevou.Doctor_ID= "
+						+doctor_id+" and  randevou.Date = CURDATE();";
 			connection.resSet = connection.stmt.executeQuery(query);
 			return connection.resSet;
 			
@@ -50,7 +51,7 @@ public class doctorFunctionImpl implements doctorFunctions {
 		//SELECT * FROM `randevou` WHERE date IN (SELECT max(date) FROM `randevou` WHERE Patient_ID = "+patient_id+")
 		try{
 			connectDB connection = new connectDB();
-			String query = "SELECT * FROM `randevou` WHERE date IN (SELECT max(date) FROM `randevou` WHERE Append = 1 and Patient_ID = "+patient_id+")";
+			String query = "SELECT * FROM `randevou` WHERE date IN (SELECT max(date) FROM `randevou` WHERE Date < CURDATE() and Append = 1 and Patient_ID = "+patient_id+")";
 			connection.resSet = connection.stmt.executeQuery(query);
 			//return connection.resSet;
 			String [] a = new String[2];
@@ -96,14 +97,15 @@ public class doctorFunctionImpl implements doctorFunctions {
 			
 			String query2 = "UPDATE patients SET Madness_level = "+lm+", Dead = "+dead+", Self_harm = "+sh+" WHERE Patient_ID="+patient_id;
 			connection.stmt.executeUpdate(query2); 
+			return true;
 		}catch(SQLException se){
 		      //Handle errors for JDBC
 		      se.printStackTrace();
 		} catch (Exception ex) {
 			System.out.println("ERROR" + ex);
 		};
-		
 		return false;
+		
 	}
 
 	@Override
@@ -111,7 +113,7 @@ public class doctorFunctionImpl implements doctorFunctions {
 		// TODO Auto-generated method stub
 		try{
 			connectDB connection = new connectDB();
-			String query = "SELECT * FROM `randevou` WHERE randevou.Updated = 0 and randevou.Doctor_ID= "+doctor_id+" and CURDATE() > randevou.date ;";
+			String query = "SELECT * FROM `randevou`, `patients` WHERE randevou.Patient_ID = patients.Patient_ID and randevou.Updated = 0 and randevou.Doctor_ID= "+doctor_id+" and CURDATE() > randevou.date ;";
 			connection.resSet = connection.stmt.executeQuery(query);
 			System.out.println(query);
 			return connection.resSet;
@@ -132,6 +134,7 @@ public class doctorFunctionImpl implements doctorFunctions {
 			+details+"', "+patient_id+", CURDATE() ,"+medication+");";
 			System.out.println(query1);
 			connection.stmt.executeUpdate(query1); 
+			return true;
 		}catch(SQLException se){
 		      //Handle errors for JDBC
 		      se.printStackTrace();
@@ -139,8 +142,7 @@ public class doctorFunctionImpl implements doctorFunctions {
 		} catch (Exception ex) {
 			System.out.println("ERROR" + ex);
 			return false;
-		};
-		return false;
+		}
 	}
 	
 	public 	String checkForAllergies(int p , int m){

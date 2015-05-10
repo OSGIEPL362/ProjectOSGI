@@ -53,7 +53,7 @@ public class patient_record_gui extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					patient_record_gui frame = new patient_record_gui(1);
+					patient_record_gui frame = new patient_record_gui(1111,1);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -65,7 +65,7 @@ public class patient_record_gui extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public patient_record_gui(int randevou_id) {
+	public patient_record_gui(int d_id, int randevou_id) {
 		
 		/****************Patient Data from DB*************************/
 		String name = "";
@@ -254,7 +254,16 @@ public class patient_record_gui extends JFrame {
 			 		sh = 0;
 			 	}
 			 	
-			 	factory1.updateRandevou(randevou_id, condition, med_id , comments,overrule, md, d, sh, pet_id);
+			 	if (factory1.updateRandevou(randevou_id, condition, med_id , comments,overrule, md, d, sh, pet_id)){
+			 		JOptionPane.showMessageDialog(null, "You have update Patient's Record!");
+					doctor_gui frame = new doctor_gui(d_id);
+					frame.setVisible(true);
+					setVisible(false);
+				}else{
+					JOptionPane.showMessageDialog(null,"Erron! Could not update patient's record",
+						    "Insert error",
+						    JOptionPane.ERROR_MESSAGE);
+				}
 			 	
 			}
 		});
@@ -276,6 +285,15 @@ public class patient_record_gui extends JFrame {
 		textField_2.setColumns(10);
 		
 		JButton btnInsertIncetent = new JButton("Insert Incetent");
+		btnInsertIncetent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				final int p_id = Integer.parseInt(textField_1.getText()); 
+				incitent frame = new incitent( p_id, d_id);
+				frame.setVisible(true);
+				setVisible(false);
+			}
+		});
 		btnInsertIncetent.setBounds(255, 492, 151, 23);
 		panel_1.add(btnInsertIncetent);
 		
