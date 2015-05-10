@@ -21,12 +21,6 @@ import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 
-//import aa.modifyCustomer;
-//import aa.wrongID;
-
-
-
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -38,6 +32,10 @@ import java.sql.SQLException;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+
+import medicalFactory.medicalServiceFactory;
+import medicalModel.medicalFunctions;
+
 
 public class GUI_Patients_Edit extends JFrame {
 
@@ -57,7 +55,34 @@ public class GUI_Patients_Edit extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GUI_Patients_Edit(int ID) {
+	public GUI_Patients_Edit(int ID, int p_id) {
+		
+		/****************Patient Data from DB*************************/
+		String name1 = "";
+		Integer patient_id = 0;
+		Integer lm = 0;
+		Integer d = -1;
+		Integer sh = -1;
+		String email1 = "";
+		String addr = "";
+		medicalFunctions factory = medicalServiceFactory.getFactory();
+		ResultSet rs = factory.getInfoForPatient(p_id);
+		try {
+			if (rs.next()) {
+				patient_id = rs.getInt("Patient_ID");
+				name1 = rs.getString("Name");
+				lm = rs.getInt("Madness_level");
+				d = rs.getInt("Dead");
+				sh = rs.getInt("Self_harm");
+				email1 = rs.getString("Relative_Email");
+				addr = rs.getString("Address");
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		/*********************************************************************/
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 593, 423);
 		contentPane = new JPanel();
@@ -106,6 +131,7 @@ public class GUI_Patients_Edit extends JFrame {
 		
 		pid = new JTextField();
 		pid.setEditable(false);
+		pid.setText(patient_id.toString());
 		pid.setColumns(10);
 		pid.setBounds(140, 11, 196, 28);
 		panel_1.add(pid);
@@ -113,26 +139,39 @@ public class GUI_Patients_Edit extends JFrame {
 		name = new JTextField();
 		name.setColumns(10);
 		name.setBounds(140, 45, 196, 28);
+		name.setText(name1);
 		panel_1.add(name);
 		
 		address = new JTextField();
 		address.setColumns(10);
 		address.setBounds(140, 84, 196, 28);
+		address.setText(addr);
 		panel_1.add(address);
 		
 		email = new JTextField();
 		email.setColumns(10);
 		email.setBounds(140, 163, 196, 28);
+		email.setText(email1);
 		panel_1.add(email);
 		
 		JRadioButton dead = new JRadioButton("Yes");
 		dead.setFont(new Font("Calibri", Font.PLAIN, 14));
 		dead.setBounds(183, 262, 109, 23);
+		if (d == 0){
+			dead.setSelected(false);
+		}else{
+			dead.setSelected(true);
+		}
 		panel_1.add(dead);
 		
 		JRadioButton harm = new JRadioButton("Yes");
 		harm.setFont(new Font("Calibri", Font.PLAIN, 14));
 		harm.setBounds(10, 262, 109, 23);
+		if(sh == 0){
+			harm.setSelected(false);
+		}else{
+			harm.setSelected(true);
+		}
 		panel_1.add(harm);
 		
 		JButton button = new JButton("Save");
@@ -148,7 +187,19 @@ public class GUI_Patients_Edit extends JFrame {
 					if(harm.isSelected())
 						p_harm=1;
 					if(dead.isSelected())
-						p_dead=1;					
+						p_dead=1;	
+					
+					medicalFunctions factory = medicalServiceFactory.getFactory();
+					if (factory.editPatient(p_id, p_name,  p_addr, p_lvl, p_email, p_harm, p_dead)){
+						JOptionPane.showMessageDialog(null, "Update Patient!");
+						General frame = new General(ID);
+						frame.setVisible(true);
+						setVisible(false);
+					}else{
+						JOptionPane.showMessageDialog(null,"Erron! Could not update patient",
+							    "Insert error",
+							    JOptionPane.ERROR_MESSAGE);
+					}
 					
 				}
 				
@@ -200,6 +251,7 @@ public class GUI_Patients_Edit extends JFrame {
 		combo = new JComboBox();
 		combo.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
 		combo.setBounds(140, 129, 70, 20);
+		combo.setSelectedIndex(lm-1);
 		panel_1.add(combo);
 	}
 }

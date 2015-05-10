@@ -87,22 +87,18 @@ public class Staff_list extends JFrame {
 		
 		String header[] = new String[] { "Staff ID","Name" };
 		model.setColumnIdentifiers(header);	
-			
-		final ArrayList<Integer> patientID = new ArrayList<Integer>();
-		final ArrayList<String> name = new ArrayList<String>();
+		
 		
 		medicalFunctions factory = medicalServiceFactory.getFactory();	
 		ResultSet rs = factory.getStaff();
 		
 		try {
 			while (rs.next()) {
-				Integer id = rs.getInt("Patient_ID");
-				patientID.add(id);
+				
+				Integer id = rs.getInt("Staff_ID");
 				String name1 = rs.getString("Name");
-				name.add(name1);
 				model.addRow(new Object[] { id, name1});
-				//String surname = rs.getString("Surname");
-				System.out.println("Patient "+name1 );
+			
 			}
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block

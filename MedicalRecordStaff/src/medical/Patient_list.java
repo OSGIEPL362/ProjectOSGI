@@ -96,7 +96,7 @@ public class Patient_list extends JFrame {
 		
 		try {
 			while (rs.next()) {
-				Integer id = rs.getInt("Staff_ID");
+				Integer id = rs.getInt("Patient_ID");
 				String name1 = rs.getString("Name");
 				model.addRow(new Object[] { id, name1});
 				
@@ -117,7 +117,9 @@ public class Patient_list extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				final int no = Integer.parseInt(textField.getText()); 
-				
+				GUI_Patients_Edit frame = new GUI_Patients_Edit(ID, no);
+				frame.setVisible(true);
+				setVisible(false);
 				
 			}
 		});
