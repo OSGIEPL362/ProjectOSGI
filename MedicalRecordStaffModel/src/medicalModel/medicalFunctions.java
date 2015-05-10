@@ -10,7 +10,8 @@ public interface medicalFunctions {
 	ResultSet getPatients();
 	ResultSet getStaff();
 	
-	
+	ResultSet getInfoForPatient(int id);
+	ResultSet getInfoForStaff(int id);
 	
 	boolean editPatient(int id, String name, String Address, int level, String realative, int hurm, int dead);
 	

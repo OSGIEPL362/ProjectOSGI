@@ -77,6 +77,33 @@ public class medicalFunctionsImpl implements  medicalFunctions{
 		return null;
 	}
 	
+	public ResultSet getInfoForPatient(int id){
+		try{
+			connectDB connection = new connectDB();
+			String query = "SELECT * FROM `patients` WHERE Patient_ID="+id;
+			connection.resSet = connection.stmt.executeQuery(query);
+			return connection.resSet;
+		}catch(SQLException se){
+		      se.printStackTrace();
+		} catch (Exception ex) {
+			System.out.println("ERROR" + ex);
+		};
+		return null;
+	}
+	public ResultSet getInfoForStaff(int id){
+		try{
+			connectDB connection = new connectDB();
+			String query = "SELECT * FROM `staff` WHERE Staff_ID="+id;
+			connection.resSet = connection.stmt.executeQuery(query);
+			return connection.resSet;
+		}catch(SQLException se){
+		      se.printStackTrace();
+		} catch (Exception ex) {
+			System.out.println("ERROR" + ex);
+		};
+		return null;	
+	}
+	
 	
 	public boolean editPatient(int id, String name,  String Address, int level, String realative, int hurm, int dead){
 		//UPDATE MyGuests SET lastname='Doe' WHERE id=2
