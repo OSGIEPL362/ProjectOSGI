@@ -26,6 +26,8 @@ import javax.swing.JButton;
 
 
 
+
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -34,8 +36,12 @@ import java.awt.event.MouseEvent;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+
+import medicalFactory.medicalServiceFactory;
+import medicalModel.medicalFunctions;
 
 public class GUI_Patients extends JFrame {
 
@@ -149,14 +155,19 @@ public class GUI_Patients extends JFrame {
 					if(dead.isSelected())
 						p_dead=1;
 					
+					medicalFunctions factory = medicalServiceFactory.getFactory();
 					
-					
-					//System.out.println(insert);
-					
-					//System.out.println(p_id+" "+p_name+" "+p_addr+" "+p_email+" "+p_harm+" "+p_dead+" "+insert);
-					//ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY
-					//stmt = conn.createStatement	();
-					//ResultSet srs =	stmt.executeQuery("SELECT * FROM CUSTOMERS");					
+					if (factory.addPatient(p_id, p_name,  p_addr, p_lvl, p_email, p_harm, p_dead)){
+						JOptionPane.showMessageDialog(null, "New Patient Added!");
+						General frame = new General(ID);
+						frame.setVisible(true);
+						setVisible(false);
+					}else{
+						JOptionPane.showMessageDialog(null,"Erron! Could not add patient",
+							    "Insert error",
+							    JOptionPane.ERROR_MESSAGE);
+					}
+								
 					
 				}
 				

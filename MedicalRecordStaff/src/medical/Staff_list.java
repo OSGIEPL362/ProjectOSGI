@@ -92,7 +92,7 @@ public class Staff_list extends JFrame {
 		final ArrayList<String> name = new ArrayList<String>();
 		
 		medicalFunctions factory = medicalServiceFactory.getFactory();	
-		ResultSet rs = factory.getPatients();
+		ResultSet rs = factory.getStaff();
 		
 		try {
 			while (rs.next()) {

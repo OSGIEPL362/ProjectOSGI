@@ -92,7 +92,7 @@ public class Patient_list extends JFrame {
 		model.setColumnIdentifiers(header);	
 		
 		medicalFunctions factory = medicalServiceFactory.getFactory();	
-		ResultSet rs = factory.getStaff();
+		ResultSet rs = factory.getPatients();
 		
 		try {
 			while (rs.next()) {
