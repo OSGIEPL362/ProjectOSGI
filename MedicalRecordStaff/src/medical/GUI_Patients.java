@@ -182,6 +182,7 @@ public class GUI_Patients extends JFrame {
 		});					
 		
 		button.setFont(new Font("Calibri", Font.PLAIN, 14));
+		
 		button.setBounds(383, 242, 109, 23);
 		panel_1.add(button);
 		

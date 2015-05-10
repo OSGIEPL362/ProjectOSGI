@@ -33,6 +33,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class GUI_Staff_Edit extends JFrame {
 
@@ -54,7 +56,44 @@ public class GUI_Staff_Edit extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GUI_Staff_Edit(int ID) {
+	public GUI_Staff_Edit(int ID, int s_id) {
+		/****************Patient Data from DB*************************/
+		Integer sid = -1;
+		String name1 = "";
+		String addr = "";
+		String clinic1 = "";
+		String usern = "";
+		String passw ="";
+		
+		Integer d = -1;
+		Integer n = 0;
+		Integer r = -1;
+		Integer h = -1;
+		Integer m = -1;
+		
+		
+		medicalFunctions factory = medicalServiceFactory.getFactory();
+		ResultSet rs = factory.getInfoForStaff(s_id);
+		try {
+			if (rs.next()) {
+				sid = rs.getInt("Staff_ID");
+				name1 = rs.getString("Name");
+				addr = rs.getString("Email");
+				clinic1 = rs.getString("Clinic_Name");
+				usern = rs.getString("Username");
+				passw = rs.getString("Password");
+				
+				d = rs.getInt("Doctor");
+				n = rs.getInt("Nurse");
+				r = rs.getInt("Receptionist");
+				h = rs.getInt("Manager");
+				m = rs.getInt("Medical");
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		/*********************************************************************/
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 599, 371);
 		contentPane = new JPanel();
@@ -107,57 +146,75 @@ public class GUI_Staff_Edit extends JFrame {
 		panel_1.add(lblPassword);
 		
 		staffID = new JTextField();
+		staffID.setEditable(false);
 		staffID.setColumns(10);
 		staffID.setBounds(105, 11, 231, 28);
+		staffID.setText(sid.toString());
 		panel_1.add(staffID);
 		
 		name = new JTextField();
 		name.setColumns(10);
 		name.setBounds(105, 45, 231, 28);
+		name.setText(name1);
 		panel_1.add(name);
 		
 		address = new JTextField();
 		address.setColumns(10);
 		address.setBounds(105, 84, 231, 28);
+		address.setText(addr);
 		panel_1.add(address);
 		
 		clinic = new JTextField();
 		clinic.setColumns(10);
 		clinic.setBounds(105, 123, 231, 28);
+		clinic.setText(clinic1);
 		panel_1.add(clinic);
 		
 		user = new JTextField();
 		user.setColumns(10);
 		user.setBounds(105, 168, 231, 28);
+		user.setText(usern);
 		panel_1.add(user);
 		
 		pass = new JTextField();
 		pass.setColumns(10);
 		pass.setBounds(105, 205, 231, 28);
+		pass.setText(passw);
 		panel_1.add(pass);
 		
 		JRadioButton hea = new JRadioButton("Health Service");
 		hea.setFont(new Font("Calibri", Font.PLAIN, 14));
 		hea.setBounds(370, 120, 109, 23);
+		if (h == 1)
+			hea.setSelected(true);
 		panel_1.add(hea);
 		
 		JRadioButton rec = new JRadioButton("Receptionist");
 		rec.setFont(new Font("Calibri", Font.PLAIN, 14));
 		rec.setBounds(370, 85, 109, 23);
+		if (r == 1)
+			rec.setSelected(true);
 		panel_1.add(rec);
 		
 		JRadioButton nur = new JRadioButton("Nurse");
 		nur.setFont(new Font("Calibri", Font.PLAIN, 14));
 		nur.setBounds(370, 49, 109, 23);
+		if (n==1)
+			nur.setSelected(true);
 		panel_1.add(nur);
 		
 		JRadioButton doc = new JRadioButton("Doctor");
 		doc.setFont(new Font("Calibri", Font.PLAIN, 14));
 		doc.setBounds(370, 15, 109, 23);
+		if (d==1)
+			doc.setSelected(true);
 		panel_1.add(doc);
 		
-		JRadioButton man = new JRadioButton("Manager");
+		JRadioButton man = new JRadioButton("Medical");
+		man.setFont(new Font("Calibri", Font.PLAIN, 14));
 		man.setBounds(370, 159, 109, 23);
+		if (m == 1)
+			man.setSelected(true);
 		panel_1.add(man);
 		
 		ButtonGroup group = new ButtonGroup();
@@ -190,15 +247,15 @@ public class GUI_Staff_Edit extends JFrame {
 				if(man.isSelected())
 					s_man=1;
 				
-medicalFunctions factory = medicalServiceFactory.getFactory();
+				medicalFunctions factory = medicalServiceFactory.getFactory();
 				
-				if (factory.addStaff(s_id, s_name,  s_email, s_clinic, s_user, s_pass, s_doc,s_nur ,s_rec ,s_hea,s_man)){
-					JOptionPane.showMessageDialog(null, "New Staff Added!");
+				if (factory.editStaff(s_id, s_name,  s_email, s_clinic, s_user, s_pass, s_doc,s_nur ,s_rec ,s_hea,s_man)){
+					JOptionPane.showMessageDialog(null, "Update Staff!");
 					General frame = new General(ID);
 					frame.setVisible(true);
 					setVisible(false);
 				}else{
-					JOptionPane.showMessageDialog(null,"Erron! Could not add staff",
+					JOptionPane.showMessageDialog(null,"Erron! Could not update staff",
 						    "Insert error",
 						    JOptionPane.ERROR_MESSAGE);
 				}

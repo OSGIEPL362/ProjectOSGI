@@ -107,6 +107,14 @@ public class Staff_list extends JFrame {
 		/**************************************************************/
 				
 		JButton button = new JButton("Go Go Coco");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				final int no = Integer.parseInt(textField.getText()); 
+				GUI_Staff_Edit frame = new GUI_Staff_Edit(ID, no);
+				frame.setVisible(true);
+				setVisible(false);
+			}
+		});
 		button.setBounds(320, 294, 101, 23);
 		panel_1.add(button);
 		

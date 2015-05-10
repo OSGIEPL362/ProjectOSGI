@@ -226,6 +226,8 @@ public class GUI_Patients_Edit extends JFrame {
 		
 		button.setFont(new Font("Calibri", Font.PLAIN, 14));
 		button.setBounds(383, 242, 109, 23);
+		if (d == 1)
+			button.setEnabled(false);
 		panel_1.add(button);
 		
 		JLabel lblSelfharm = new JLabel("SelfHarm:");
