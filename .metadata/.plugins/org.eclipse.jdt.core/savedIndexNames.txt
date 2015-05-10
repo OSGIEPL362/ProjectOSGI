@@ -1,0 +1,15 @@
+INDEX VERSION 1.127+C:\Users\andreas\Documents\GitHub\ProjectOSGI\.metadata\.plugins\org.eclipse.jdt.core
+961517430.index
+409125593.index
+955724586.index
+2444235317.index
+1734703654.index
+3755456200.index
+248019280.index
+3826356278.index
+1988085025.index
+293050241.index
+2621239060.index
+2877100653.index
+2270868195.index
+2889044153.index
