@@ -11,6 +11,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import java.awt.event.ActionListener;
@@ -79,9 +80,7 @@ public class login extends JFrame {
 
 				//System.out.println(u+p);
 				//maria01 pass
-				int a[] =factory.login(u, p);
-				
-				
+				int a[] =factory.login(u, p);				
 				
 				System.out.println(a[0]+" "+a[1]);
 				
@@ -133,6 +132,12 @@ public class login extends JFrame {
 						e.printStackTrace();
 					}
 				}
+				if(a[0]==-1){
+					JOptionPane.showMessageDialog(null,
+						    "You didn't insert valid data!!!",
+						    "Try again",
+						    JOptionPane.ERROR_MESSAGE);
+				}
 				
 				
 				/*doc -> doctor_goui(patient_id)
@@ -142,7 +147,7 @@ public class login extends JFrame {
 				manager ->*/
 				//General frame = new General();
 				//frame.setVisible(true);
-				setVisible(false);
+				//setVisible(false);
 				
 			}
 		});

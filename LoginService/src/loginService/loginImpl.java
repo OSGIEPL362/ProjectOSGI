@@ -35,7 +35,8 @@ public class loginImpl implements loginFunction {
 				}
 				else{
 					a[0]=-1;
-				}
+					return a;
+				}				
 				a[1]=connection.resSet.getInt("Staff_ID");
 				return a;
 			} catch (SQLException e1) {
