@@ -48,7 +48,7 @@ public class GUI_Staff extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GUI_Staff() {
+	public GUI_Staff(int ID) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 599, 371);
 		contentPane = new JPanel();
@@ -166,7 +166,7 @@ public class GUI_Staff extends JFrame {
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				General frame = new General();
+				General frame = new General(ID);
 				frame.setVisible(true);
 				setVisible(false);
 			}

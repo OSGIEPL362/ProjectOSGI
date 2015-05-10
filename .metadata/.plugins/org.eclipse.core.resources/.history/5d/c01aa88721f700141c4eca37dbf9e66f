@@ -1,0 +1,41 @@
+package loginService;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import dataBaseConnect.connectDB;
+import loginModel.loginFunction;
+
+public class loginImpl implements loginFunction {
+
+	@Override
+	public int login(String username, String password) {
+		// TODO Auto-generated method stub.
+		try{
+			connectDB connection = new connectDB();
+			String query = "SELECT * FROM `randevou`, `patients` WHERE randevou.Patient_ID = patients.Patient_ID and randevou.Doctor_ID= "+doctor_id+" ;";
+			connection.resSet = connection.stmt.executeQuery(query);
+
+			ResultSet rs = factory.getRandevous(1111);
+			try {
+				while (rs.next()) {
+					String name = rs.getString("Name");
+					//String surname = rs.getString("Surname");
+					System.out.println("Patient "+name );
+				}
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}catch(SQLException se){
+		      se.printStackTrace();
+		} catch (Exception ex) {
+			System.out.println("ERROR" + ex);
+		};
+		
+		
+		return 0;
+	}
+
+}

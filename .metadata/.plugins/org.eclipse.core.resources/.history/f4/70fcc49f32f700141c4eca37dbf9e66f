@@ -1,0 +1,18 @@
+package loginFactory;
+import loginModel.loginFunction;
+import loginService.loginImpl;
+
+public class loginFactory {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		private static loginFunction login = new loginImpl();
+		public static loginFunction getFactory(){
+			return lg;
+		}
+	}
+
+}
+
+

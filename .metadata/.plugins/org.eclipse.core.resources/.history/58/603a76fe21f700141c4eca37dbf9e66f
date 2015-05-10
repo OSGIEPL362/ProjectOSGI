@@ -1,0 +1,16 @@
+package login;
+
+
+
+import loginModel.loginFunction;
+
+public class trial {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		loginFunction factory = loginFactory.getFactory();
+		
+	}
+
+}

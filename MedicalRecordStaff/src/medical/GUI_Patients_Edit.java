@@ -55,7 +55,7 @@ public class GUI_Patients_Edit extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GUI_Patients_Edit() {
+	public GUI_Patients_Edit(int ID) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 593, 423);
 		contentPane = new JPanel();
@@ -178,7 +178,7 @@ public class GUI_Patients_Edit extends JFrame {
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				General frame = new General();
+				General frame = new General(ID);
 				frame.setVisible(true);
 				setVisible(false);
 				

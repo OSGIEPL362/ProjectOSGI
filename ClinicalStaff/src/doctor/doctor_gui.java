@@ -22,7 +22,7 @@ public class doctor_gui extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+		/*EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					doctor_gui frame = new doctor_gui(1111);
@@ -31,7 +31,7 @@ public class doctor_gui extends JFrame {
 					e.printStackTrace();
 				}
 			}
-		});
+		});*/
 	}
 
 	/**

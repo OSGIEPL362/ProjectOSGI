@@ -1,0 +1,13 @@
+package loginFactory;
+
+import loginModel.loginFunction;
+import loginService.loginImpl;
+
+public class loginFactory {
+
+	private static loginFunction lg = new loginImpl();
+	
+	public static loginFunction getFactory(){
+		return lg;
+	}
+}
