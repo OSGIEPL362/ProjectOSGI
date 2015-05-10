@@ -41,6 +41,10 @@ public class patient_record_gui extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTable table;
+	private JComboBox comboBox;
+	private JTextArea textArea_1;
+	JRadioButton rdbtnYes_1 ;
+	JRadioButton rdbtnYes;
 
 	/**
 	 * Launch the application.
@@ -217,10 +221,13 @@ public class patient_record_gui extends JFrame {
 		JButton btnUpdate = new JButton("Update");
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				doctorFunctions factory1 = doctorServiceFactory.getFactory();
 				final int med_id = Integer.parseInt(textField.getText()); 
 				final int pet_id = Integer.parseInt(textField_1.getText());
+				
 			 	String details = factory1.checkForAllergies(pet_id, med_id);
+			 	
 			 	int overrule = -1;
 			 	if (details.equals("")){
 			 		overrule = 0;			 		
@@ -228,7 +235,26 @@ public class patient_record_gui extends JFrame {
 			 		overrule = 1;
 			 	}
 			 	
-			 	//comboBox.getSelectetIndex();
+			 	int md = comboBox.getSelectedIndex();
+			 	String condition = textArea.getText();
+			 	String comments = textArea_1.getText();
+			 	
+			 	int d = -1;
+			 	if(rdbtnYes.isSelected()){
+			 		d=1;
+			 	}else{
+			 		d=0;
+			 	}
+			 	
+			 	int sh = -1;
+			 	if (rdbtnYes_1.isSelected()){
+			 		sh = 1;
+			 	}
+			 	else{
+			 		sh = 0;
+			 	}
+			 	
+			 	factory1.updateRandevou(randevou_id, condition, med_id , comments,overrule, md, d, sh, pet_id);
 			 	
 			}
 		});
@@ -253,7 +279,7 @@ public class patient_record_gui extends JFrame {
 		btnInsertIncetent.setBounds(255, 492, 151, 23);
 		panel_1.add(btnInsertIncetent);
 		
-		JTextArea textArea_1 = new JTextArea();
+		textArea_1 = new JTextArea();
 		textArea_1.setBounds(136, 401, 311, 73);
 		panel_1.add(textArea_1);
 		
@@ -273,14 +299,14 @@ public class patient_record_gui extends JFrame {
 		lblRelativeEmail.setBounds(24, 155, 93, 14);
 		panel_1.add(lblRelativeEmail);
 		
-		JRadioButton rdbtnYes = new JRadioButton("Yes");
+		rdbtnYes = new JRadioButton("Yes");
 		rdbtnYes.setBounds(136, 114, 52, 23);
 		if (d==1){
 			rdbtnYes.setSelected(true);
 		}
 		panel_1.add(rdbtnYes);
 		
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
 		comboBox.setBounds(136, 85, 52, 20);
 		comboBox.setSelectedIndex(lm-1);
@@ -297,7 +323,7 @@ public class patient_record_gui extends JFrame {
 		lblSelfHurm.setBounds(229, 122, 78, 14);
 		panel_1.add(lblSelfHurm);
 		
-		JRadioButton rdbtnYes_1 = new JRadioButton("Yes");
+		rdbtnYes_1 = new JRadioButton("Yes");
 		rdbtnYes_1.setBounds(296, 114, 57, 23);
 		if (sh==1){
 			rdbtnYes_1.setSelected(true);

@@ -54,7 +54,7 @@ public class trial {
 			e1.printStackTrace();
 		}
 		
-		//factory.updateRandevou(1, "kolos",12, "vlimma",0);
+		factory.updateRandevou(1, "kolos",12, "vlimma",0, 1, 1, 1, 1112);
 		
 		ResultSet rs3 = factory.getNotUpdatedRandevous(1111);
 		
