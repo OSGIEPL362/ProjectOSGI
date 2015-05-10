@@ -6,5 +6,8 @@
 	<classpathentry kind="lib" path="C:/Users/Antria/EPL362/MedicalRecordStaffService/mysql-connector-java-5.1.35-bin.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Antria/EPL362/MedicalRecordStaffService/sqljdbc.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Antria/EPL362/MedicalRecordStaffService/sqljdbc4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Antria/EPL362/mysql-connector-java-5.1.35-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Antria/EPL362/sqljdbc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Antria/EPL362/sqljdbc4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

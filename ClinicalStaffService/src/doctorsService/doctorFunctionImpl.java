@@ -84,8 +84,7 @@ public class doctorFunctionImpl implements doctorFunctions {
 	}
 
 	@Override
-	public boolean updateRandevou(int randevou_id, String Condition,
-			int Medication, String comments, int overule) {
+	public boolean updateRandevou(int randevou_id, String Condition, int Medication, String comments,int overule, int lm, int dead, int sh, int patient_id) {
 		// TODO Auto-generated method stub
 		try {
 			connectDB connection = new connectDB();
