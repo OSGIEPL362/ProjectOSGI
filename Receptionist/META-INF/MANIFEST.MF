@@ -4,3 +4,5 @@ Bundle-Name: Receptionist
 Bundle-SymbolicName: Receptionist
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Import-Package: receptionistFactory,
+ receptionistModel
