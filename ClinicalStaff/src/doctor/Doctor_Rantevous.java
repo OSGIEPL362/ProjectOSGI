@@ -103,6 +103,7 @@ public class Doctor_Rantevous extends JFrame {
 				String date1 = rs.getString("Date");
 				date.add(date1);
 				String time1 = rs.getString("Time");
+				time1=time1+".00";
 				time.add(time1);
 				model.addRow(new Object[] { randevou, name2,date1 , time1});
 			}

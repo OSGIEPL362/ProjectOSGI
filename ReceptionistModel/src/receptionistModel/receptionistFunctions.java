@@ -10,4 +10,6 @@ public interface receptionistFunctions {
 	
 	ResultSet getStaff(String clinic);
 	
+	public ResultSet getInfoForPatient(int id);
+	
 }

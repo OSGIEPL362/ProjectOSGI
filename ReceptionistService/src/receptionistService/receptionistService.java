@@ -55,4 +55,18 @@ public class receptionistService implements receptionistFunctions {
 		return null;
 	}
 
+	public ResultSet getInfoForPatient(int id){
+		try{
+			connectDB connection = new connectDB();
+			String query = "SELECT * FROM `patients` WHERE Patient_ID="+id;
+			connection.resSet = connection.stmt.executeQuery(query);
+			return connection.resSet;
+		}catch(SQLException se){
+		      se.printStackTrace();
+		} catch (Exception ex) {
+			System.out.println("ERROR" + ex);
+		};
+		return null;
+	}
+
 }

@@ -37,7 +37,7 @@ public class Patient_list extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTable table;
-
+	private ArrayList<Integer>l = new ArrayList<Integer>();
 	/**
 	 * Launch the application.
 	 */
@@ -104,10 +104,8 @@ public class Patient_list extends JFrame {
 				String name1 = rs.getString("Name");
 				int sh = rs.getInt("Self_Harm");
 				model.addRow(new Object[] { id, name1});
+				l.add(id);
 				
-				if (sh == 1){
-					
-				}
 			}
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
@@ -125,6 +123,9 @@ public class Patient_list extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				final int no = Integer.parseInt(textField.getText()); 
+				if (l.contains(no)){
+					
+				}
 //				GUI_Patients_Edit frame = new GUI_Patients_Edit(ID, no);
 //				frame.setVisible(true);
 //				setVisible(false);

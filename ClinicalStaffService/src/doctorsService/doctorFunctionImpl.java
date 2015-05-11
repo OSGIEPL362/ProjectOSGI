@@ -14,7 +14,7 @@ public class doctorFunctionImpl implements doctorFunctions {
 		try{
 			connectDB connection = new connectDB();
 			String query = "SELECT * FROM `randevou`, `patients` WHERE randevou.Patient_ID = patients.Patient_ID and randevou.Doctor_ID= "
-						+doctor_id+" and  randevou.Date = CURDATE();";
+						+doctor_id+" and  randevou.Date = CURDATE() and patients.Dead=0;";
 			connection.resSet = connection.stmt.executeQuery(query);
 			return connection.resSet;
 			

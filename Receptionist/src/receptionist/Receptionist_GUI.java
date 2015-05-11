@@ -10,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Receptionist_GUI extends JFrame {
 
@@ -22,7 +24,7 @@ public class Receptionist_GUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Receptionist_GUI frame = new Receptionist_GUI();
+					Receptionist_GUI frame = new Receptionist_GUI(1);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -34,7 +36,7 @@ public class Receptionist_GUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Receptionist_GUI() {
+	public Receptionist_GUI(int ID) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 477, 308);
 		contentPane = new JPanel();
@@ -61,6 +63,14 @@ public class Receptionist_GUI extends JFrame {
 		panel_1.add(btnCtreatRandevou);
 		
 		JButton btnListOfPatients = new JButton("List of Patients");
+		btnListOfPatients.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Patient_list frame =new Patient_list(ID);
+				frame.setVisible(true);
+				setVisible(false);
+			}
+		});
 		btnListOfPatients.setBounds(104, 102, 181, 28);
 		panel_1.add(btnListOfPatients);
 		
