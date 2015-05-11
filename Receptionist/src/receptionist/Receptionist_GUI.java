@@ -36,7 +36,7 @@ public class Receptionist_GUI extends JFrame {
 	 */
 	public Receptionist_GUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 477, 269);
+		setBounds(100, 100, 477, 308);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -53,7 +53,7 @@ public class Receptionist_GUI extends JFrame {
 		panel_1.setLayout(null);
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 128)));
 		panel_1.setBackground(new Color(173, 216, 230));
-		panel_1.setBounds(24, 25, 400, 171);
+		panel_1.setBounds(24, 25, 400, 206);
 		panel.add(panel_1);
 		
 		JButton btnCtreatRandevou = new JButton("Creat Randevou");
@@ -61,7 +61,11 @@ public class Receptionist_GUI extends JFrame {
 		panel_1.add(btnCtreatRandevou);
 		
 		JButton btnListOfPatients = new JButton("List of Patients");
-		btnListOfPatients.setBounds(104, 108, 181, 28);
+		btnListOfPatients.setBounds(104, 102, 181, 28);
 		panel_1.add(btnListOfPatients);
+		
+		JButton btnListOfRandevous = new JButton("List Of Randevous");
+		btnListOfRandevous.setBounds(104, 161, 181, 28);
+		panel_1.add(btnListOfRandevous);
 	}
 }
