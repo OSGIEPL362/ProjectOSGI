@@ -144,5 +144,60 @@ public class medicalFunctionsImpl implements  medicalFunctions{
 		
 		return true;
 	}
+	
+	
+
+	/**
+	 * 
+	 * This method is used for checking if the given text
+	 * is a string without numbers or spaces.
+	 *
+	 *@param t - input string
+	 *@return -true string without numbers or spaces.
+	 */
+	public  boolean checkString(String t) {
+
+		char[] chars = t.toCharArray();
+
+		for (char c : chars) {
+			if (!Character.isLetter(c)&& !(c==' ')) {
+				return false;
+			}
+		}
+
+		return true;
+
+	}
+	/**
+	 * 
+	 * This method is used for checking if the given text
+	 * is a number.
+	 *
+	 *@param s- input string
+	 *@return -true if is number
+	 */
+	public  boolean checkNumber(String s) {
+
+		if (!s.matches("[0-9]+")) {
+			return false;
+		}
+		return true;
+
+	}
+
+	/**
+	 * 
+	 * This method is used for checking if the given text
+	 * is an email.
+	 *
+	 *@param s -string input
+	 *@return -true if string is e-mail address
+	 */
+	public  boolean checkEmailAddress(String s) {
+		String epatern = "^.+@.+";
+		java.util.regex.Pattern p = java.util.regex.Pattern.compile(epatern);
+		java.util.regex.Matcher m = p.matcher(s);
+		return m.matches();
+	}
 
 }

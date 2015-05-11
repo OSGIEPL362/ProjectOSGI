@@ -52,6 +52,10 @@ public class GUI_Patients extends JFrame {
 	public JTextField email;
 	public JComboBox combo ;
 
+	
+	
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -142,44 +146,61 @@ public class GUI_Patients extends JFrame {
 		JButton button = new JButton("Save");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try {
+				
+					boolean f1=true;
+					boolean f2=true;
+					boolean f3=true;
+					medicalFunctions factory = medicalServiceFactory.getFactory();
 					
-					String p_id=pid.getText();
-					if 
+					String foo=pid.getText();
+					int p_id=0;
+					if (factory.checkNumber(foo)){
+						p_id = Integer.parseInt(foo);
+					}
+					else{
+						f1=false;
+					}
+					
 					String p_name=name.getText();
+					if (!factory.checkString(p_name)){
+						f2=false;
+					}
+						
 					String p_addr=address.getText();
 					int p_lvl=combo.getSelectedIndex() +1;
+					
 					String p_email=email.getText();
+					if (!factory.checkEmailAddress(p_email)){
+						f2=false;
+					}
+					
 					int p_harm=0,p_dead=0;
 					if(harm.isSelected())
 						p_harm=1;
 					if(dead.isSelected())
 						p_dead=1;
 					
-					medicalFunctions factory = medicalServiceFactory.getFactory();
 					
-					if (factory.addPatient(p_id, p_name,  p_addr, p_lvl, p_email, p_harm, p_dead)){
-						JOptionPane.showMessageDialog(null, "New Patient Added!");
-						General frame = new General(ID);
-						frame.setVisible(true);
-						setVisible(false);
-					}else{
-						JOptionPane.showMessageDialog(null,"Erron! Could not add patient",
+					if(f1&&f2&&f3){
+						if (factory.addPatient(p_id, p_name,  p_addr, p_lvl, p_email, p_harm, p_dead)){
+							JOptionPane.showMessageDialog(null, "New Patient Added!");
+							General frame = new General(ID);
+							frame.setVisible(true);
+							setVisible(false);
+						}else{
+							JOptionPane.showMessageDialog(null,"Erron! Could not add patient",
+								    "Insert error",
+								    JOptionPane.ERROR_MESSAGE);
+						}
+					}
+					else{
+						JOptionPane.showMessageDialog(null,"Erron! error input",
 							    "Insert error",
 							    JOptionPane.ERROR_MESSAGE);
 					}
-								
-					
-				}
-				
-				catch (NumberFormatException q) {
-					JOptionPane.showMessageDialog(null,"Please give valid ID.", "Error",JOptionPane.ERROR_MESSAGE);
-				}
-				
-				
-				
-				
+		
 			}
+	
 		});					
 		
 		button.setFont(new Font("Calibri", Font.PLAIN, 14));

@@ -189,25 +189,48 @@ public class GUI_Patients_Edit extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					int p_id=Integer.parseInt(pid.getText());
+					
+					boolean f2=true;
+					boolean f3=true;
+					medicalFunctions factory = medicalServiceFactory.getFactory();
+					
+					String foo=pid.getText();
+					int p_id=Integer.parseInt(foo);
+					
 					String p_name=name.getText();
+					if (!factory.checkString(p_name)){
+						f2=false;
+					}
+						
 					String p_addr=address.getText();
 					int p_lvl=combo.getSelectedIndex() +1;
+					
 					String p_email=email.getText();
+					if (!factory.checkEmailAddress(p_email)){
+						f2=false;
+					}
+					
 					int p_harm=0,p_dead=0;
 					if(harm.isSelected())
 						p_harm=1;
 					if(dead.isSelected())
-						p_dead=1;	
+						p_dead=1;
 					
-					medicalFunctions factory = medicalServiceFactory.getFactory();
-					if (factory.editPatient(p_id, p_name,  p_addr, p_lvl, p_email, p_harm, p_dead)){
-						JOptionPane.showMessageDialog(null, "Update Patient!");
-						General frame = new General(ID);
-						frame.setVisible(true);
-						setVisible(false);
-					}else{
-						JOptionPane.showMessageDialog(null,"Erron! Could not update patient",
+					
+					if(f2&&f3){
+						if (factory.editPatient(p_id, p_name,  p_addr, p_lvl, p_email, p_harm, p_dead)){
+							JOptionPane.showMessageDialog(null, "Update Patient!");
+							General frame = new General(ID);
+							frame.setVisible(true);
+							setVisible(false);
+						}else{
+							JOptionPane.showMessageDialog(null,"Erron! Could not update patient",
+								    "Insert error",
+								    JOptionPane.ERROR_MESSAGE);
+						}
+					}
+					else{
+						JOptionPane.showMessageDialog(null,"Erron! error input",
 							    "Insert error",
 							    JOptionPane.ERROR_MESSAGE);
 					}

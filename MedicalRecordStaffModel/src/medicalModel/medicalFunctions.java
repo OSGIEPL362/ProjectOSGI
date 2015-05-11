@@ -19,4 +19,8 @@ public interface medicalFunctions {
 			String password,int doc, int nurse, int receptionist, int health, int manager);
 
 	
+	boolean checkString(String t);
+	boolean checkNumber(String s);
+	boolean checkEmailAddress(String s);
+
 }

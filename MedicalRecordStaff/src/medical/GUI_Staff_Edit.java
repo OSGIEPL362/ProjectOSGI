@@ -229,10 +229,31 @@ public class GUI_Staff_Edit extends JFrame {
         Bsave.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		
-        		int s_id=Integer.parseInt(staffID.getText());
+        		
+				boolean f2=true;
+				boolean f3=true;
+				boolean f4=true;
+				medicalFunctions factory = medicalServiceFactory.getFactory();
+				
+				String foo=staffID.getText();
+				int s_id=Integer.parseInt(foo);
+			
 				String s_name=name.getText();
+				if (!factory.checkString(s_name)){
+					f2=false;
+				}
+				
 				String s_email=address.getText();
+				if (!factory.checkEmailAddress(s_email)){
+					f3=false;
+				}
+				
+				
 				String s_clinic=clinic.getText();
+				if (!factory.checkString(s_clinic)){
+					f4=false;
+				}
+				
 				String s_user=user.getText();
 				String s_pass=pass.getText();
 				int s_doc=0,s_rec=0,s_nur=0,s_hea=0, s_man=0;
@@ -247,19 +268,22 @@ public class GUI_Staff_Edit extends JFrame {
 				if(man.isSelected())
 					s_man=1;
 				
-				medicalFunctions factory = medicalServiceFactory.getFactory();
-				
-				if (factory.editStaff(s_id, s_name,  s_email, s_clinic, s_user, s_pass, s_doc,s_nur ,s_rec ,s_hea,s_man)){
-					JOptionPane.showMessageDialog(null, "Update Staff!");
-					General frame = new General(ID);
-					frame.setVisible(true);
-					setVisible(false);
+				if(f2&&f3&&f4){			
+					if (factory.editStaff(s_id, s_name,  s_email, s_clinic, s_user, s_pass, s_doc,s_nur ,s_rec ,s_hea,s_man)){
+						JOptionPane.showMessageDialog(null, "Update Staff!");
+						General frame = new General(ID);
+						frame.setVisible(true);
+						setVisible(false);
+					}else{
+						JOptionPane.showMessageDialog(null,"Erron! Could not update staff",
+							    "Insert error",
+							    JOptionPane.ERROR_MESSAGE);
+					}
 				}else{
-					JOptionPane.showMessageDialog(null,"Erron! Could not update staff",
+					JOptionPane.showMessageDialog(null,"Erron! error input",
 						    "Insert error",
 						    JOptionPane.ERROR_MESSAGE);
 				}
-				
 				
 				//System.out.println(s_id+" "+s_name+" "+s_email+" "+s_clinic+" "+s_user+" "+s_pass+" "+s_doc+" "+
 				//s_rec+" "+s_nur+" "+s_hea);
