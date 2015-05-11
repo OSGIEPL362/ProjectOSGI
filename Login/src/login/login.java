@@ -21,6 +21,7 @@ import loginFactory.loginFactory;
 import loginModel.loginFunction;
 import medical.General;
 import doctor.doctor_gui;
+import nurse.Patient_list;
 
 public class login extends JFrame {
 
@@ -93,15 +94,15 @@ public class login extends JFrame {
 						e.printStackTrace();
 					}
 				}
-				/*if(a[0]==1){  nurse
+				if(a[0]==1){ 	// nurse
 					try {
-						doctor_gui frame = new doctor_gui(a[1]);
+						Patient_list frame = new Patient_list(a[1]);
 						frame.setVisible(true);
 						setVisible(false);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-				}*/
+				}
 				
 				/*if(a[0]==2){    receptionist
 					try {

@@ -7,4 +7,5 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: doctor,
  loginFactory,
  loginModel,
- medical
+ medical,
+ nurse

@@ -144,7 +144,8 @@ public class GUI_Patients extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					
-					int p_id=Integer.parseInt(pid.getText());
+					String p_id=pid.getText();
+					if 
 					String p_name=name.getText();
 					String p_addr=address.getText();
 					int p_lvl=combo.getSelectedIndex() +1;
