@@ -89,6 +89,13 @@ public class doctor_gui extends JFrame {
 		panel_1.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Drop In Session");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dropInSearch frame = new dropInSearch(doctor_id);
+				frame.setVisible(true);
+				setVisible(false);
+			}
+		});
 		btnNewButton_2.setBounds(63, 167, 152, 28);
 		panel_1.add(btnNewButton_2);
 	}

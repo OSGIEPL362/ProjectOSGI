@@ -46,9 +46,7 @@ public class doctorFunctionImpl implements doctorFunctions {
 	@Override
 	public String[] getLastConditionAndMedicationOfPatient(int patient_id) {
 		// TODO Auto-generated method stub
-		//Select * FROM `randevou` WHRE randevou.Patient_ID="+patient_id+" ORDER BY DATE_ADDED DESC LIMIT 1
-		//SELECT model, date FROM doc WHERE date = (SELECT MAX(date)
-		//SELECT * FROM `randevou` WHERE date IN (SELECT max(date) FROM `randevou` WHERE Patient_ID = "+patient_id+")
+	
 		try{
 			connectDB connection = new connectDB();
 			String query = "SELECT * FROM `randevou` WHERE date IN (SELECT max(date) FROM `randevou` WHERE Date < CURDATE() and Append = 1 and Patient_ID = "+patient_id+")";
@@ -161,6 +159,42 @@ public class doctorFunctionImpl implements doctorFunctions {
 			System.out.println("ERROR" + ex);
 		};
 		return "";
+	}
+	
+	public String [] getDrugInfo (int dr_id){
+		try{
+			connectDB connection = new connectDB();
+			String query = "SELECT * FROM `drugs` WHERE drugs.Medication_ID = "+dr_id+";";
+			connection.resSet = connection.stmt.executeQuery(query);
+			String [] a = new String[2];
+			if (connection.resSet.next()){
+				a[0]=connection.resSet.getString("Medication_Name");
+				a[1] = connection.resSet.getString("Discreption");
+			}
+			return a;
+		}catch(SQLException se){
+		      se.printStackTrace();
+		} catch (Exception ex) {
+			System.out.println("ERROR" + ex);
+		};
+		return null;
+	}
+	
+	public boolean updateDropIn(int randevou, int d_id){
+		try {
+			connectDB connection = new connectDB();
+			String query1= "UPDATE randevou SET  drop_in = 1, Drop_in_date = NOW() ,Drop_in_doc = "+d_id+ " WHERE Randevou_ID = "+randevou+";";
+					System.out.println(query1);
+			connection.stmt.executeUpdate(query1); 
+			
+			return true;
+		}catch(SQLException se){
+		      //Handle errors for JDBC
+		      se.printStackTrace();
+		} catch (Exception ex) {
+			System.out.println("ERROR" + ex);
+		};
+		return false;
 	}
 
 

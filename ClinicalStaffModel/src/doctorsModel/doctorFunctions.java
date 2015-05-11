@@ -15,7 +15,8 @@ public interface doctorFunctions {
 	
 	String checkForAllergies(int p , int m);
 	
+	String [] getDrugInfo (int dr_id);
 	
-	
+	boolean updateDropIn(int randevou, int d_id);
 	
 }
