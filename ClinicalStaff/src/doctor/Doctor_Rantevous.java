@@ -124,6 +124,7 @@ public class Doctor_Rantevous extends JFrame {
 		JButton btnGoGoCoco = new JButton("Go Go Coco");
 		btnGoGoCoco.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+			
 				final int id = Integer.parseInt(textField.getText()); 
 				try {
 					patient_record_gui frame = new patient_record_gui(doctor_id,id);

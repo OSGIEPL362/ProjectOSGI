@@ -111,7 +111,7 @@ public class doctorFunctionImpl implements doctorFunctions {
 		// TODO Auto-generated method stub
 		try{
 			connectDB connection = new connectDB();
-			String query = "SELECT * FROM `randevou`, `patients` WHERE randevou.Patient_ID = patients.Patient_ID and randevou.Updated = 0 and randevou.Doctor_ID= "+doctor_id+" and CURDATE() > randevou.date ;";
+			String query = "SELECT * FROM `randevou`, `patients` WHERE randevou.Patient_ID = patients.Patient_ID and randevou.Append=1 and randevou.Updated = 0 and randevou.Doctor_ID= "+doctor_id+" and CURDATE() > randevou.date and patients.Dead=0;";
 			connection.resSet = connection.stmt.executeQuery(query);
 			System.out.println(query);
 			return connection.resSet;

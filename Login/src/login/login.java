@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import receptionist.Receptionist_GUI;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -104,15 +106,15 @@ public class login extends JFrame {
 					}
 				}
 				
-//				if(a[0]==2){    //receptionist
-//					try {
-//						doctor_gui frame = new doctor_gui(a[1]);
-//						frame.setVisible(true);
-//						setVisible(false);
-//					} catch (Exception e) {
-//						e.printStackTrace();
-//					}
-//				}
+				if(a[0]==2){    //receptionist
+					try {
+						Receptionist_GUI frame = new Receptionist_GUI(a[1]);
+						frame.setVisible(true);
+						setVisible(false);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
 				
 				/*if(a[0]==3){     manager
 					try {

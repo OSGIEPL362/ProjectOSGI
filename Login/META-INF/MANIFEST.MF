@@ -8,4 +8,5 @@ Import-Package: doctor,
  loginFactory,
  loginModel,
  medical,
- nurse
+ nurse,
+ receptionist
