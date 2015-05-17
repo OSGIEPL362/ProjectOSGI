@@ -24,6 +24,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class dropInSearch extends JFrame {
 
@@ -77,43 +79,68 @@ public class dropInSearch extends JFrame {
 		panel_1.add(lblGiveRandevouId);
 		
 		textField = new JTextField();
-		textField.setBounds(88, 93, 86, 30);
+		textField.setBounds(88, 93, 86, 20);
 		panel_1.add(textField);
 		textField.setColumns(10);
 		
 		JButton btnChec = new JButton("Check for Drop in");
 		btnChec.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				final int no = Integer.parseInt(textField.getText());
-				doctorFunctions factory = doctorServiceFactory.getFactory();
-				ResultSet rs1 = factory.getRandevouInfo(no);
-				try {
-					if (rs1.next()) {
-						String name = rs1.getString("Date");
-						String surname = rs1.getString("Name");
-						System.out.println("Randevou "+name + "Patienr "+surname );
-						int dr = rs1.getInt("drop_in");
-						if (dr == 1){
-							JOptionPane.showMessageDialog(null,"Patient have allready took the medicent...",
+				String s=textField.getText();
+				if (s.matches("[0-9]+")){
+					final int no = Integer.parseInt(textField.getText());
+					doctorFunctions factory = doctorServiceFactory.getFactory();
+					ResultSet rs1 = factory.getRandevouInfo(no);
+					try {
+						if (rs1.next()) {
+							String name = rs1.getString("Date");
+							String surname = rs1.getString("Name");
+							System.out.println("Randevou "+name + "Patienr "+surname );
+							int dr = rs1.getInt("drop_in");
+							if (dr == 1){
+								JOptionPane.showMessageDialog(null,"Patient have allready took the medicent...",
+									    "Insert error",
+									    JOptionPane.ERROR_MESSAGE);
+							}
+							else{
+								dropIn frame = new dropIn(d_id, no);
+								frame.setVisible(true);
+								setVisible(false);
+							}
+							
+						}else{
+							JOptionPane.showMessageDialog(null,"Not exist rantevou",
 								    "Insert error",
 								    JOptionPane.ERROR_MESSAGE);
 						}
-						else{
-							dropIn frame = new dropIn(d_id, no);
-							frame.setVisible(true);
-							setVisible(false);
-						}
-						
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				}else{
+					JOptionPane.showMessageDialog(null,"Error Input",
+						    "Insert error",
+						    JOptionPane.ERROR_MESSAGE);
 				}
+				
 				
 			}
 		});
-		btnChec.setBounds(75, 149, 119, 30);
+		btnChec.setBounds(59, 124, 142, 30);
 		panel_1.add(btnChec);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				doctor_gui frame = new doctor_gui(d_id);
+
+				frame.setVisible(true);
+				setVisible(false);
+			}
+		});
+		btnBack.setBounds(59, 165, 142, 30);
+		panel_1.add(btnBack);
 		
 		
 	}

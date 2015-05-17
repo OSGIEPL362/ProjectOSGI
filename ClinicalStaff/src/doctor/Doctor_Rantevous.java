@@ -132,7 +132,7 @@ public class Doctor_Rantevous extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				String s=textField.getText();
 				if (s.matches("[0-9]+")) {
-					System.out.print("ASFSAFA");
+					
 					final int no = Integer.parseInt(textField.getText()); 
 					if(l.contains(no)){
 						patient_record_gui frame = new patient_record_gui(doctor_id,no);

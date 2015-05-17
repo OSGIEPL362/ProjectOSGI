@@ -45,6 +45,7 @@ public class patient_record_gui extends JFrame {
 	private JTable table;
 	private JComboBox comboBox;
 	private JTextArea textArea_1;
+	private JTextArea textArea;
 	JRadioButton rdbtnYes_1 ;
 	JRadioButton rdbtnYes;
 	private ArrayList<Integer>l = new ArrayList<Integer>();
@@ -97,13 +98,13 @@ public class patient_record_gui extends JFrame {
 		/****************Get Last condition and medication*************************/
 		
 		String [] cond_med= factory.getLastConditionAndMedicationOfPatient(patient_id);
-		System.out.println("c: "+cond_med[0]+" m: "+cond_med[1]);
+		//System.out.println("c: "+cond_med[0]+" m: "+cond_med[1]);
 		
 		/*********************************************************************/
 
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 593, 645);
+		setBounds(100, 100, 593, 731);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -120,7 +121,7 @@ public class patient_record_gui extends JFrame {
 		panel_1.setLayout(null);
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 128)));
 		panel_1.setBackground(new Color(173, 216, 230));
-		panel_1.setBounds(26, 30, 515, 538);
+		panel_1.setBounds(26, 30, 515, 642);
 		panel.add(panel_1);
 		
 		
@@ -193,11 +194,6 @@ public class patient_record_gui extends JFrame {
 		panel_1.add(textField);
 		textField.setColumns(10);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(136, 183, 311, 55);
-		textArea.setText(cond_med[0]);
-		panel_1.add(textArea);
-		
 		
 		JButton btnCheckForAllergies = new JButton("Check for Allergies");
 		btnCheckForAllergies.addActionListener(new ActionListener() {
@@ -253,8 +249,10 @@ public class patient_record_gui extends JFrame {
 					med_id = Integer.parseInt(textField.getText()); 
 					if(l.contains(med_id)){
 						pet_id = Integer.parseInt(textField_1.getText());
-					 	details = factory1.checkForAllergies(pet_id, med_id);
-					 	
+					 	details = factory1.checkForAllergies(pet_id, med_id);	
+					}
+					else{
+						flag=false;
 					}
 				}
 				else{
@@ -308,7 +306,7 @@ public class patient_record_gui extends JFrame {
 			 	
 			}
 		});
-		btnUpdate.setBounds(125, 492, 89, 23);
+		btnUpdate.setBounds(139, 608, 89, 23);
 		panel_1.add(btnUpdate);
 		
 		textField_1 = new JTextField();
@@ -330,20 +328,20 @@ public class patient_record_gui extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				final int p_id = Integer.parseInt(textField_1.getText()); 
-				incitent frame = new incitent( p_id, d_id);
+				incitent frame = new incitent( p_id, d_id,randevou_id);
 				frame.setVisible(true);
 				setVisible(false);
 			}
 		});
-		btnInsertIncetent.setBounds(255, 492, 151, 23);
+		btnInsertIncetent.setBounds(269, 608, 151, 23);
 		panel_1.add(btnInsertIncetent);
 		
 		textArea_1 = new JTextArea();
-		textArea_1.setBounds(136, 401, 311, 73);
+		textArea_1.setBounds(136, 524, 311, 73);
 		panel_1.add(textArea_1);
 		
 		JLabel lblComments = new JLabel("Comments:");
-		lblComments.setBounds(24, 406, 78, 14);
+		lblComments.setBounds(24, 524, 78, 14);
 		panel_1.add(lblComments);
 		
 		JLabel lblLevelOfMaddness = new JLabel("Level of Madness:");
@@ -399,7 +397,31 @@ public class patient_record_gui extends JFrame {
 				setVisible(false);
 			}
 		});
-		btnBack.setBounds(10, 492, 89, 23);
+		btnBack.setBounds(24, 608, 89, 23);
 		panel_1.add(btnBack);
+		
+		JLabel lblA = new JLabel("Old Commentd:");
+		lblA.setBounds(24, 423, 93, 14);
+		panel_1.add(lblA);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(136, 411, 311, 102);
+		panel_1.add(scrollPane_1);
+		
+		JTextArea textArea_2 = new JTextArea();
+		textArea_2.setEditable(false);
+		textArea_2.setEnabled(false);
+		textArea_2.setText(cond_med[2]);
+		textArea_2.setLineWrap(true);
+		
+		scrollPane_1.setViewportView(textArea_2);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(136, 183, 311, 54);
+		panel_1.add(scrollPane_2);
+		
+		 textArea = new JTextArea();
+		textArea.setText(cond_med[0]);
+		scrollPane_2.setViewportView(textArea);
 	}
 }

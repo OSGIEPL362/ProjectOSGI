@@ -35,6 +35,7 @@ public class incitent extends JFrame {
 	private JTextField textField;
 	private JTextField textField_2;
 	private JTable table;
+	private ArrayList<Integer>l = new ArrayList<Integer>();
 
 	/**
 	 * Launch the application.
@@ -43,7 +44,7 @@ public class incitent extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					incitent frame = new incitent(1112,1111);
+					incitent frame = new incitent(1112,1111,1234);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,7 +56,7 @@ public class incitent extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public incitent(Integer p_id, Integer d_id) {
+	public incitent(Integer p_id, Integer d_id,Integer ranevou_id) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 599, 498);
 		contentPane = new JPanel();
@@ -132,6 +133,7 @@ public class incitent extends JFrame {
 				String di = dr.getString("Discreption");
 				disc.add(di);
 				
+				l.add(med);
 				model.addRow(new Object[] { med, name2,di});
 			}
 		} catch (SQLException e1) {
@@ -154,19 +156,33 @@ public class incitent extends JFrame {
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String details = textArea.getText();
-				final int no = Integer.parseInt(textField_2.getText()); 
-				
-				doctorFunctions factory = doctorServiceFactory.getFactory();
-				if(factory.insertIncentend(p_id, details, no)){
-					JOptionPane.showMessageDialog(null, "You have add an incetent!");
-					doctor_gui frame = new doctor_gui(d_id);
-					frame.setVisible(true);
-					setVisible(false);
+				String s=textField_2.getText();
+				if(s.matches("[0-9]+")){
+					final int no = Integer.parseInt(s); 
+					if (l.contains(no)){
+						doctorFunctions factory = doctorServiceFactory.getFactory();
+						if(factory.insertIncentend(p_id, details, no)){
+							JOptionPane.showMessageDialog(null, "You have add an incetent!");
+							doctor_gui frame = new doctor_gui(d_id);
+							frame.setVisible(true);
+							setVisible(false);
+						}else{
+							JOptionPane.showMessageDialog(null,"Erron! Could not add an incedent",
+								    "Insert error",
+								    JOptionPane.ERROR_MESSAGE);
+						}
+					}else{
+						JOptionPane.showMessageDialog(null,"Erron! Could not add an incedent",
+							    "Input error",
+							    JOptionPane.ERROR_MESSAGE);
+					}
 				}else{
 					JOptionPane.showMessageDialog(null,"Erron! Could not add an incedent",
-						    "Insert error",
+						    "Input error",
 						    JOptionPane.ERROR_MESSAGE);
 				}
+				
+			
 			}
 		});
 		btnUpdate.setBounds(149, 364, 89, 23);
@@ -177,10 +193,15 @@ public class incitent extends JFrame {
 		panel_1.add(scrollPane_1);
 		
 		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				patient_record_gui frame = new patient_record_gui(d_id,p_id);
+				patient_record_gui frame = new patient_record_gui(d_id,ranevou_id);
 				
 				frame.setVisible(true);
 				setVisible(false);
