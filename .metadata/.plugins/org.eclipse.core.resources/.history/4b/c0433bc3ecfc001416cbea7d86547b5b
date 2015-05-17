@@ -152,7 +152,6 @@ public class GUI_Staff extends JFrame {
 		panel_1.add(nur);
 		
 		JRadioButton doc = new JRadioButton("Doctor");
-		doc.setSelected(true);
 		doc.setFont(new Font("Calibri", Font.PLAIN, 14));
 		doc.setBounds(370, 15, 109, 23);
 		panel_1.add(doc);

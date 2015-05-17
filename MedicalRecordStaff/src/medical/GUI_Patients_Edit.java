@@ -45,6 +45,7 @@ public class GUI_Patients_Edit extends JFrame {
 	public JTextField address;
 	public JTextField email;
 	private JComboBox combo;
+	private int selfHarm;
 	/**
 	 * Launch the application.
 	 */
@@ -74,6 +75,7 @@ public class GUI_Patients_Edit extends JFrame {
 				lm = rs.getInt("Madness_level");
 				d = rs.getInt("Dead");
 				sh = rs.getInt("Self_harm");
+				selfHarm = sh;
 				email1 = rs.getString("Relative_Email");
 				addr = rs.getString("Address");
 			}
@@ -219,6 +221,17 @@ public class GUI_Patients_Edit extends JFrame {
 					
 					if(f2&&f3){
 						if (factory.editPatient(p_id, p_name,  p_addr, p_lvl, p_email, p_harm, p_dead)){
+							
+							if (selfHarm==0 && p_harm == 1){
+								if (factory.SendEmailtoALL(p_id,p_email , p_name)){
+						 			JOptionPane.showMessageDialog(null, "You have Send Email");
+						 		}else{
+						 			JOptionPane.showMessageDialog(null,"Erron! Could not Send Email",
+										    "Insert error",
+										    JOptionPane.ERROR_MESSAGE);
+						 		}
+							}
+							
 							JOptionPane.showMessageDialog(null, "Update Patient!");
 							General frame = new General(ID);
 							frame.setVisible(true);

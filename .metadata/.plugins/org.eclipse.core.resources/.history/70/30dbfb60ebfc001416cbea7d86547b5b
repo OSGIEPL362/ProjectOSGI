@@ -16,7 +16,7 @@ import javax.mail.internet.MimeMessage;
 
 import medicalModel.medicalFunctions;
 import dataBaseConnect.connectDB;
-
+import doctorsService.doctorFunctionImpl.SMTPAuthenticator;
 
 
 public class medicalFunctionsImpl implements  medicalFunctions{
