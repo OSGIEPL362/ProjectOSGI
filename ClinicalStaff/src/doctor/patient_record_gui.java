@@ -241,10 +241,32 @@ public class patient_record_gui extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				doctorFunctions factory1 = doctorServiceFactory.getFactory();
-				final int med_id = Integer.parseInt(textField.getText()); 
-				final int pet_id = Integer.parseInt(textField_1.getText());
+				String details="";
+				String s =textField.getText();
+				boolean flag=true;
 				
-			 	String details = factory1.checkForAllergies(pet_id, med_id);
+				int pet_id = 0;
+				final int med_id;
+				
+				
+				if (s.matches("[0-9]+")){
+					med_id = Integer.parseInt(textField.getText()); 
+					if(l.contains(med_id)){
+						pet_id = Integer.parseInt(textField_1.getText());
+					 	details = factory1.checkForAllergies(pet_id, med_id);
+					 	
+					}
+				}
+				else{
+					med_id=0;
+					pet_id=0;
+					flag=false;
+					
+				}
+				
+				
+				
+			 	//String details = factory1.checkForAllergies(pet_id, med_id);
 			 	
 			 	int overrule = -1;
 			 	if (details.equals("")){
@@ -271,12 +293,13 @@ public class patient_record_gui extends JFrame {
 			 	else{
 			 		sh = 0;
 			 	}
-			 	
-			 	if (factory1.updateRandevou(randevou_id, condition, med_id , comments,overrule, md, d, sh, pet_id)){
-			 		JOptionPane.showMessageDialog(null, "You have update Patient's Record!");
-					doctor_gui frame = new doctor_gui(d_id);
-					frame.setVisible(true);
-					setVisible(false);
+			 	if(flag){
+				 	if (factory1.updateRandevou(randevou_id, condition, med_id , comments,overrule, md, d, sh, pet_id)){
+				 		JOptionPane.showMessageDialog(null, "You have update Patient's Record!");
+						doctor_gui frame = new doctor_gui(d_id);
+						frame.setVisible(true);
+						setVisible(false);
+				 	}
 				}else{
 					JOptionPane.showMessageDialog(null,"Erron! Could not update patient's record",
 						    "Insert error",
