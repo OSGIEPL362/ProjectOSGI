@@ -26,6 +26,8 @@ import doctorsModel.doctorFunctions;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class incitent extends JFrame {
 
@@ -175,6 +177,15 @@ public class incitent extends JFrame {
 		panel_1.add(scrollPane_1);
 		
 		JButton btnBack = new JButton("Back");
+		btnBack.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				patient_record_gui frame = new patient_record_gui(d_id,p_id);
+				
+				frame.setVisible(true);
+				setVisible(false);
+			}
+		});
 		btnBack.setBounds(267, 364, 89, 23);
 		panel_1.add(btnBack);
 	}

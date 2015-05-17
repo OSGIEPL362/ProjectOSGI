@@ -13,23 +13,28 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTable;
 
+
 import doctorFactory.doctorServiceFactory;
 import doctorsModel.doctorFunctions;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Doctor_Rantevous extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTable table;
+	private ArrayList<Integer>l = new ArrayList<Integer>();
 
 	/**
 	 * Launch the application.
@@ -52,7 +57,7 @@ public class Doctor_Rantevous extends JFrame {
 	 */
 	public Doctor_Rantevous(int doctor_id) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 593, 423);
+		setBounds(100, 100, 620, 450);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -69,7 +74,7 @@ public class Doctor_Rantevous extends JFrame {
 		panel_1.setLayout(null);
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 128)));
 		panel_1.setBackground(new Color(173, 216, 230));
-		panel_1.setBounds(26, 30, 515, 330);
+		panel_1.setBounds(26, 30, 545, 361);
 		panel.add(panel_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -106,6 +111,7 @@ public class Doctor_Rantevous extends JFrame {
 				time1=time1+".00";
 				time.add(time1);
 				model.addRow(new Object[] { randevou, name2,date1 , time1});
+				l.add(randevou);
 			}
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
@@ -124,18 +130,49 @@ public class Doctor_Rantevous extends JFrame {
 		JButton btnGoGoCoco = new JButton("Go Go Coco");
 		btnGoGoCoco.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			
-				final int id = Integer.parseInt(textField.getText()); 
-				try {
-					patient_record_gui frame = new patient_record_gui(doctor_id,id);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
+				String s=textField.getText();
+				if (s.matches("[0-9]+")) {
+					System.out.print("ASFSAFA");
+					final int no = Integer.parseInt(textField.getText()); 
+					if(l.contains(no)){
+						patient_record_gui frame = new patient_record_gui(doctor_id,no);
+						
+						frame.setVisible(true);
+						setVisible(false);
+					}
+					else{
+						JOptionPane.showMessageDialog(null,"Erron! error input",
+							    "Insert error",
+							    JOptionPane.ERROR_MESSAGE);
+					}
 				}
-				
+				else{
+					System.out.print("oxi");
+					JOptionPane.showMessageDialog(null,"Erron! error input",
+						    "Insert error",
+						    JOptionPane.ERROR_MESSAGE);
+				}
+	
 			}
 		});
-		btnGoGoCoco.setBounds(352, 291, 101, 23);
+		btnGoGoCoco.setBounds(355, 291, 101, 23);
 		panel_1.add(btnGoGoCoco);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				doctor_gui frame = new doctor_gui(doctor_id);
+				
+				frame.setVisible(true);
+				setVisible(false);
+			}
+		});
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnBack.setBounds(355, 325, 101, 23);
+		panel_1.add(btnBack);
 	}
 }

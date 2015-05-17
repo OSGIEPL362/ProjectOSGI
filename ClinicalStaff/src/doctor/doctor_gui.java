@@ -66,6 +66,7 @@ public class doctor_gui extends JFrame {
 				try {
 					Doctor_Rantevous frame = new Doctor_Rantevous(doctor_id);
 					frame.setVisible(true);
+					setVisible(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -80,6 +81,7 @@ public class doctor_gui extends JFrame {
 				try {
 					noUpdate_Rantevou frame = new noUpdate_Rantevou(doctor_id);
 					frame.setVisible(true);
+					setVisible(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

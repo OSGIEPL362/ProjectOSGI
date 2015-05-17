@@ -32,6 +32,8 @@ import javax.swing.JTable;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class patient_record_gui extends JFrame {
 
@@ -45,6 +47,7 @@ public class patient_record_gui extends JFrame {
 	private JTextArea textArea_1;
 	JRadioButton rdbtnYes_1 ;
 	JRadioButton rdbtnYes;
+	private ArrayList<Integer>l = new ArrayList<Integer>();
 
 	/**
 	 * Launch the application.
@@ -168,6 +171,7 @@ public class patient_record_gui extends JFrame {
 				names.add(name2);
 				String di = dr.getString("Discreption");
 				disc.add(di);
+				l.add(med);
 				
 				model.addRow(new Object[] { med, name2,di});
 			}
@@ -199,20 +203,34 @@ public class patient_record_gui extends JFrame {
 		btnCheckForAllergies.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				doctorFunctions factory1 = doctorServiceFactory.getFactory();
-				final int med_id = Integer.parseInt(textField.getText()); 
-				final int pet_id = Integer.parseInt(textField_1.getText());
-			 	String details = factory1.checkForAllergies(pet_id, med_id);
-			 	
-			 	if (details.equals("")){
-			 		JOptionPane.showMessageDialog(null, "No Allergy.");
-			 		
-			 	}else{
-			 		JOptionPane.showMessageDialog(null,
-			 				"There is an allergy in this drug.\n" +details ,
-			 			    "Allergy Detecte",
-			 			    JOptionPane.ERROR_MESSAGE);
-					
-			 	}
+				String s =textField.getText();
+				if (s.matches("[0-9]+")){
+					final int med_id = Integer.parseInt(textField.getText()); 
+					if(l.contains(med_id)){
+						final int pet_id = Integer.parseInt(textField_1.getText());
+					 	String details = factory1.checkForAllergies(pet_id, med_id);
+					 	
+					 	if (details.equals("")){
+					 		JOptionPane.showMessageDialog(null, "No Allergy.");
+					 		
+					 	}else{
+					 		JOptionPane.showMessageDialog(null,
+					 				"There is an allergy in this drug.\n" +details ,
+					 			    "Allergy Detecte",
+					 			    JOptionPane.ERROR_MESSAGE);
+							
+					 	}
+					}else{
+						JOptionPane.showMessageDialog(null,"Erron! error input",
+							    "Insert error",
+							    JOptionPane.ERROR_MESSAGE);
+					}
+				}else{
+					JOptionPane.showMessageDialog(null,"Erron! error input",
+						    "Insert error",
+						    JOptionPane.ERROR_MESSAGE);
+				}
+				 	
 			}
 		});
 		btnCheckForAllergies.setBounds(266, 369, 151, 23);
@@ -347,5 +365,18 @@ public class patient_record_gui extends JFrame {
 			rdbtnYes_1.setSelected(true);
 		}
 		panel_1.add(rdbtnYes_1);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				doctor_gui frame = new doctor_gui(d_id);
+				
+				frame.setVisible(true);
+				setVisible(false);
+			}
+		});
+		btnBack.setBounds(10, 492, 89, 23);
+		panel_1.add(btnBack);
 	}
 }
