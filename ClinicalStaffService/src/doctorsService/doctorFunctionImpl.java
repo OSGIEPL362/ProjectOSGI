@@ -49,7 +49,7 @@ public class doctorFunctionImpl implements doctorFunctions {
 	
 		try{
 			connectDB connection = new connectDB();
-			String query = "SELECT * FROM `randevou` WHERE date IN (SELECT max(date) FROM `randevou` WHERE Date < CURDATE() and Append = 1 and Patient_ID = "+patient_id+")";
+			String query = "SELECT * FROM `randevou` WHERE date IN (SELECT max(date) FROM `randevou` WHERE Date < CURDATE() and Append = 1 and Updated = 1 and Patient_ID = "+patient_id+")";
 			connection.resSet = connection.stmt.executeQuery(query);
 			//return connection.resSet;
 			String [] a = new String[2];

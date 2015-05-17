@@ -10,6 +10,14 @@ public interface receptionistFunctions {
 	
 	ResultSet getStaff(String clinic);
 	
-	public ResultSet getInfoForPatient(int id);
+	ResultSet getInfoForPatient(int id);
+	
+	String getCliniName(int id);
+	
+	boolean creareNewRandevou(int pid, String date, int time, String clinic, int did);
+	
+	String[] getLastConditionAndMedicationOfPatient(int patient_id);
+	
+	ResultSet getRandevous ();
 	
 }

@@ -10,8 +10,14 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.JButton;
+
+import receptionistFactory.receptionistFactory;
+import receptionistModel.receptionistFunctions;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Receptionist_GUI extends JFrame {
 
@@ -38,7 +44,7 @@ public class Receptionist_GUI extends JFrame {
 	 */
 	public Receptionist_GUI(int ID) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 477, 308);
+		setBounds(100, 100, 477, 377);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -55,27 +61,58 @@ public class Receptionist_GUI extends JFrame {
 		panel_1.setLayout(null);
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 128)));
 		panel_1.setBackground(new Color(173, 216, 230));
-		panel_1.setBounds(24, 25, 400, 206);
+		panel_1.setBounds(24, 25, 400, 272);
 		panel.add(panel_1);
 		
 		JButton btnCtreatRandevou = new JButton("Creat Randevou");
-		btnCtreatRandevou.setBounds(104, 43, 181, 28);
-		panel_1.add(btnCtreatRandevou);
-		
-		JButton btnListOfPatients = new JButton("List of Patients");
-		btnListOfPatients.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				Patient_list frame =new Patient_list(ID);
+		btnCtreatRandevou.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				receptionistFunctions factory = receptionistFactory.getFactory();	
+				String clinic = factory.getCliniName(ID);
+				newRandevou frame =new newRandevou(clinic,ID);
 				frame.setVisible(true);
 				setVisible(false);
 			}
 		});
+		btnCtreatRandevou.setBounds(104, 43, 181, 28);
+		panel_1.add(btnCtreatRandevou);
+		
+		JButton btnListOfPatients = new JButton("List of Patients");
+		btnListOfPatients.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				/////////////////////////////////////
+				Patient_list frame = new Patient_list(ID, 0);
+				frame.setVisible(true);
+				setVisible(false);
+				
+				
+			}
+		});
+//		btnListOfPatients.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent arg0) {
+//				Patient_list frame =new Patient_list(ID);
+//				frame.setVisible(true);
+//				setVisible(false);
+//			}
+//		});
 		btnListOfPatients.setBounds(104, 102, 181, 28);
 		panel_1.add(btnListOfPatients);
 		
 		JButton btnListOfRandevous = new JButton("List Of Randevous");
 		btnListOfRandevous.setBounds(104, 161, 181, 28);
 		panel_1.add(btnListOfRandevous);
+		
+		JButton btnNewButton = new JButton("Find Last Prescription");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Patient_list frame = new Patient_list(ID, 1);
+				frame.setVisible(true);
+				setVisible(false);
+				
+			}
+		});
+		btnNewButton.setBounds(104, 221, 181, 28);
+		panel_1.add(btnNewButton);
 	}
 }
