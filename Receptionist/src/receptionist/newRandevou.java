@@ -19,7 +19,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
-
 import receptionistFactory.receptionistFactory;
 import receptionistModel.receptionistFunctions;
 
@@ -178,6 +177,28 @@ public class newRandevou extends JFrame {
 		panel_1.add(comboBox);
 		
 		JButton btnCreatRandevou = new JButton("Creat Randevou");
+		btnCreatRandevou.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//////////////////////////////////////////////////////////////////
+				int pid = Integer.parseInt(textField.getText());
+				String date = textField_2.getText();
+				final int did = Integer.parseInt(textField_1.getText());
+				int time = comboBox.getSelectedIndex() + 8;
+				receptionistFunctions factory = receptionistFactory.getFactory();	
+				
+				if (factory.creareNewRandevou(pid, date, time, clinic, did)){
+					JOptionPane.showMessageDialog(null, "New Randevou Added!");
+					Receptionist_GUI frame = new Receptionist_GUI(rec_id);
+					frame.setVisible(true);
+					setVisible(false);
+				}else{
+					JOptionPane.showMessageDialog(null,"Erron! Could not add randevou",
+						    "Insert error",
+						    JOptionPane.ERROR_MESSAGE);
+				}
+				
+			}
+		});
 		btnCreatRandevou.setBounds(151, 326, 177, 23);
 		panel_1.add(btnCreatRandevou);
 		

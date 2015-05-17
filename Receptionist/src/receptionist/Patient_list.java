@@ -50,7 +50,7 @@ public class Patient_list extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Patient_list frame = new Patient_list(1);
+					Patient_list frame = new Patient_list(1,0);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -62,7 +62,7 @@ public class Patient_list extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Patient_list(int ID) {
+	public Patient_list(int ID, int choise) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 539, 457);
 		contentPane = new JPanel();
@@ -127,25 +127,40 @@ public class Patient_list extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0){
 				String s=textField.getText();
-				if (s.matches("[0-9]+")) {
-					System.out.print("ASFSAFA");
-					final int no = Integer.parseInt(textField.getText()); 
-					if(l.contains(no)){
-						GUI_Patients_Show frame = new GUI_Patients_Show(ID, no);
-						frame.setVisible(true);
-						setVisible(false);
+				if (choise == 0){
+					if (s.matches("[0-9]+")) {
+						final int no = Integer.parseInt(textField.getText()); 
+						if(l.contains(no)){
+							GUI_Patients_Show frame = new GUI_Patients_Show(ID, no);
+							frame.setVisible(true);
+							setVisible(false);
+						}
+						else{
+							JOptionPane.showMessageDialog(null,"Erron! error input",
+								    "Insert error",
+								    JOptionPane.ERROR_MESSAGE);
+						}
 					}
 					else{
+						System.out.print("oxi");
 						JOptionPane.showMessageDialog(null,"Erron! error input",
 							    "Insert error",
 							    JOptionPane.ERROR_MESSAGE);
 					}
 				}
 				else{
-					System.out.print("oxi");
-					JOptionPane.showMessageDialog(null,"Erron! error input",
-						    "Insert error",
-						    JOptionPane.ERROR_MESSAGE);
+					final int no = Integer.parseInt(textField.getText()); 
+					receptionistFunctions factory = receptionistFactory.getFactory();	
+					String [] condMed = factory.getLastConditionAndMedicationOfPatient(no);
+					if (condMed != null){
+						lastTretment frame = new lastTretment(ID, no, condMed[0], condMed[1]);
+						frame.setVisible(true);
+						setVisible(false);
+					}else{
+						JOptionPane.showMessageDialog(null,"No resault",
+							    "No previous Prescriptions",
+							    JOptionPane.ERROR_MESSAGE);
+					}
 				}
 				
 				

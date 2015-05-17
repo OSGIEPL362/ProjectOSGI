@@ -50,7 +50,16 @@ public class GUI_Patients_Show extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-	
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GUI_Patients_Show frame = new GUI_Patients_Show(1,1112);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	/**
