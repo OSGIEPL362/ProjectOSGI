@@ -18,11 +18,13 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+
 
 
 
@@ -123,14 +125,32 @@ public class Patient_list extends JFrame {
 		
 		JButton button = new JButton("Go Go Coco");
 		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				final int no = Integer.parseInt(textField.getText()); 
-				if(l.contains(no)){
-					
+			public void actionPerformed(ActionEvent arg0){
+				String s=textField.getText();
+				if (s.matches("[0-9]+")) {
+					System.out.print("ASFSAFA");
+					final int no = Integer.parseInt(textField.getText()); 
+					if(l.contains(no)){
+						GUI_Patients_Show frame = new GUI_Patients_Show(ID, no);
+						frame.setVisible(true);
+						setVisible(false);
+					}
+					else{
+						JOptionPane.showMessageDialog(null,"Erron! error input",
+							    "Insert error",
+							    JOptionPane.ERROR_MESSAGE);
+					}
 				}
-				GUI_Patients_Show frame = new GUI_Patients_Show(ID, no);
-				frame.setVisible(true);
-				setVisible(false);
+				else{
+					System.out.print("oxi");
+					JOptionPane.showMessageDialog(null,"Erron! error input",
+						    "Insert error",
+						    JOptionPane.ERROR_MESSAGE);
+				}
+				
+				
+				
+				
 				
 			}
 		});
