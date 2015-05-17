@@ -127,15 +127,7 @@ public class doctorFunctionImpl implements doctorFunctions {
 			String query2 = "UPDATE patients SET Madness_level = "+lm+", Dead = "+dead+", Self_harm = "+sh+" WHERE Patient_ID="+patient_id;
 			connection.stmt.executeUpdate(query2); 
 			
-			
-			String query3 = "SELECT * FROM patients  WHERE Patient_ID="+patient_id;
-			connection.resSet = connection.stmt.executeQuery(query3);
-			if(connection.resSet.next()){
-				System.out.print(connection.resSet);
 		
-			}
-			
-			
 			return true;
 		}catch(SQLException se){
 		      //Handle errors for JDBC
@@ -237,12 +229,35 @@ public class doctorFunctionImpl implements doctorFunctions {
 		};
 		return false;
 	}
-
+	
+	
+	
+	public boolean SendEmailtoALL(int p_id,String remail, String Name){
+		try{
+			connectDB connection = new connectDB();
+			String query = "SELECT Email FROM `staff` WHERE Doctor = 1 or Nurse=1 " ;
+			connection.resSet = connection.stmt.executeQuery(query);
+			
+			
+			while(connection.resSet.next()){
+				send(connection.resSet.getString(1),p_id,Name);
+			}
+			send(remail,p_id,Name);
+			return true;
+		}catch(SQLException se){
+		      se.printStackTrace();
+		} catch (Exception ex) {
+			System.out.println("ERROR" + ex);
+		};
+		
+		return false;
+	}
+	
 	static String d_email = "pparthenhs@gmail.com";//to email mas 
 	static String d_password = "jgfaksjbfkas8934j@njms$";// o kwdikos mas 
 	static String d_host = "smtp.gmail.com";// o host
 	static String d_port = "465";// to port
-	static String m_to = "pparthenhs@yahoo.gr";//to email pou phgenei
+	static String m_to = "kkoushi_antria13@hotmail.com";//to email pou phgenei
 	static String m_subject = "To email einai etoimo ";
 	static String m_text = "Hey, this is a test email.";
     
@@ -263,10 +278,11 @@ public class doctorFunctionImpl implements doctorFunctions {
 	 *@param s7- customer last name
 	 *@param s8-type of file (find the folder)
 	 */
-    public static void send(String mailtoSend,String s5,String s6,String s7,String s8){
+    public static void send(String mailtoSend,int id,String name){
     
-    	m_to=mailtoSend;
-    	
+    	//m_to=mailtoSend;
+    	m_subject="Self harm Pasient";
+    	m_text="The Pesient with name : "+name+"and with ID:"+id+"is a self harm person";
         Properties props = new Properties();//ena hashtable
         
         props.put("mail.smtp.user", d_email);
@@ -294,29 +310,29 @@ public class doctorFunctionImpl implements doctorFunctions {
             	msg.setFrom(new InternetAddress(d_email));
             	msg.addRecipient(Message.RecipientType.TO, new InternetAddress(m_to));
             
-            BodyPart messageBodyPart = new MimeBodyPart();
+//            BodyPart messageBodyPart = new MimeBodyPart();
             
-            	messageBodyPart.setText(m_text);
+            //	messageBodyPart.setText(m_text);
             
-            Multipart multipart = new MimeMultipart();
-
-            multipart.addBodyPart(messageBodyPart);
-            
-            messageBodyPart = new MimeBodyPart();
-            
-            String file = "C:/Users/Panos/Desktop/TEAM_D_361/"+s8+"/"+ s5 +"_" + s6 + "_"+ s7 + ".pdf";
-            
-            String fileName =  s5 +"_" + s6 + "_"+ s7 + ".pdf";
-            
-            DataSource source = new FileDataSource(file);
-            
-            messageBodyPart.setDataHandler(new DataHandler(source));
-            messageBodyPart.setFileName(fileName);
-            multipart.addBodyPart(messageBodyPart);
+//            Multipart multipart = new MimeMultipart();
+//
+//            multipart.addBodyPart(messageBodyPart);
+//            
+//            messageBodyPart = new MimeBodyPart();
+//            
+//            String file = "C:/Users/Panos/Desktop/TEAM_D_361/"+s8+"/"+ s5 +"_" + s6 + "_"+ s7 + ".pdf";
+//            
+//            String fileName =  s5 +"_" + s6 + "_"+ s7 + ".pdf";
+//            
+//            DataSource source = new FileDataSource(file);
+//            
+//            messageBodyPart.setDataHandler(new DataHandler(source));
+//            messageBodyPart.setFileName(fileName);
+//            multipart.addBodyPart(messageBodyPart);
 
             msg.setText(m_text);
             
-            msg.setContent(multipart);
+           // msg.setContent(multipart);
           
           
             Transport.send(msg);

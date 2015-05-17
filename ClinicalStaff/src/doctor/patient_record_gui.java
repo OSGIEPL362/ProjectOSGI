@@ -48,6 +48,7 @@ public class patient_record_gui extends JFrame {
 	private JTextArea textArea;
 	JRadioButton rdbtnYes_1 ;
 	JRadioButton rdbtnYes;
+	private int selfHarm;
 	private ArrayList<Integer>l = new ArrayList<Integer>();
 
 	/**
@@ -87,6 +88,7 @@ public class patient_record_gui extends JFrame {
 				lm = rs.getInt("Madness_level");
 				d = rs.getInt("Dead");
 				sh = rs.getInt("Self_harm");
+				selfHarm = sh;
 				email = rs.getString("Relative_Email");
 			}
 		} catch (SQLException e1) {
@@ -291,6 +293,20 @@ public class patient_record_gui extends JFrame {
 			 	else{
 			 		sh = 0;
 			 	}
+			 	
+			 	if(selfHarm == 0 && sh == 1){
+			 		String remail=textField_3.getText();
+			 		String Name =textField_2.getText();
+			 		if (factory1.SendEmailtoALL(pet_id, remail, Name)){
+			 			JOptionPane.showMessageDialog(null, "You have Send Email");
+			 		}else{
+			 			JOptionPane.showMessageDialog(null,"Erron! Could not Send Email",
+							    "Insert error",
+							    JOptionPane.ERROR_MESSAGE);
+			 		}
+			 			
+			 	}
+			 	
 			 	if(flag){
 				 	if (factory1.updateRandevou(randevou_id, condition, med_id , comments,overrule, md, d, sh, pet_id)){
 				 		JOptionPane.showMessageDialog(null, "You have update Patient's Record!");
