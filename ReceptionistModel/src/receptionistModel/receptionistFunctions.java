@@ -20,4 +20,8 @@ public interface receptionistFunctions {
 	
 	ResultSet getRandevous ();
 	
+	String getDoctorName(int did);
+	
+	 boolean attendRandevou(int rid);
+	
 }

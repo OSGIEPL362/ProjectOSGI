@@ -59,7 +59,7 @@ public class randevouList extends JFrame {
 	 */
 	public randevouList(int ID) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 620, 450);
+		setBounds(100, 100, 743, 439);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -76,11 +76,11 @@ public class randevouList extends JFrame {
 		panel_1.setLayout(null);
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 128)));
 		panel_1.setBackground(new Color(173, 216, 230));
-		panel_1.setBounds(26, 30, 545, 361);
+		panel_1.setBounds(26, 30, 664, 346);
 		panel.add(panel_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(43, 11, 424, 269);
+		scrollPane.setBounds(43, 11, 585, 269);
 		panel_1.add(scrollPane);
 		
 		table = new JTable();
@@ -95,6 +95,7 @@ public class randevouList extends JFrame {
 			
 		final ArrayList<Integer> randevouID = new ArrayList<Integer>();
 		final ArrayList<String> names = new ArrayList<String>();
+		final ArrayList<String> namesDoc = new ArrayList<String>();
 		final ArrayList<String> date = new ArrayList<String>();
 		final ArrayList<String> time = new ArrayList<String>();
 
@@ -107,12 +108,17 @@ public class randevouList extends JFrame {
 				randevouID.add(randevou);
 				String name2 = rs.getString("Name");
 				names.add(name2);
+				
+				Integer did = rs.getInt("Doctor_ID");
+				String docName = factory.getDoctorName(did);
+				namesDoc.add(docName);
+				
 				String date1 = rs.getString("Date");
 				date.add(date1);
 				String time1 = rs.getString("Time");
 				time1=time1+".00";
 				time.add(time1);
-				model.addRow(new Object[] { randevou, name2,date1 , time1});
+				model.addRow(new Object[] { randevou, name2,docName,date1 , time1});
 				l.add(randevou);
 			}
 		} catch (SQLException e1) {
@@ -134,23 +140,33 @@ public class randevouList extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				String s=textField.getText();
 				if (s.matches("[0-9]+")) {
-					System.out.print("ASFSAFA");
+					
 					final int no = Integer.parseInt(textField.getText()); 
 					if(l.contains(no)){
 						/////////////////////////////////////////
-						
-						
+						receptionistFunctions factory = receptionistFactory.getFactory();	
+						if (factory.attendRandevou(no)){
+							JOptionPane.showMessageDialog(null,"Patient Has Attend Randevou.");
+							Receptionist_GUI frame = new Receptionist_GUI(ID);
+							frame.setVisible(true);
+							setVisible(false);
+							
+						}else{
+							JOptionPane.showMessageDialog(null,"Erron! error update",
+								    "Insert error",
+								    JOptionPane.ERROR_MESSAGE);
+						}					
 						
 					}
 					else{
-						JOptionPane.showMessageDialog(null,"Erron! error input",
+						JOptionPane.showMessageDialog(null,"Erron! error update",
 							    "Insert error",
 							    JOptionPane.ERROR_MESSAGE);
 					}
 				}
 				else{
 					System.out.print("oxi");
-					JOptionPane.showMessageDialog(null,"Erron! error input",
+					JOptionPane.showMessageDialog(null,"Erron! error update",
 						    "Insert error",
 						    JOptionPane.ERROR_MESSAGE);
 				}
@@ -168,7 +184,7 @@ public class randevouList extends JFrame {
 				setVisible(false);
 			}
 		});
-		btnBack.setBounds(355, 325, 101, 23);
+		btnBack.setBounds(509, 291, 101, 23);
 		panel_1.add(btnBack);
 	}
 }

@@ -141,7 +141,7 @@ public class receptionistService implements receptionistFunctions {
 	public 	ResultSet getRandevous (){
 		try{
 			connectDB connection = new connectDB();
-			String query = "SELECT * FROM `randevou`, `patients` WHERE randevou.Patient_ID = patients.Patient_ID and  randevou.Date = CURDATE() and patients.Dead=0;";
+			String query = "SELECT * FROM `randevou`, `patients` WHERE randevou.Patient_ID = patients.Patient_ID and  randevou.Date = CURDATE() and randevou.Append=0 and patients.Dead=0;";
 			connection.resSet = connection.stmt.executeQuery(query);
 			return connection.resSet;
 			
@@ -153,7 +153,40 @@ public class receptionistService implements receptionistFunctions {
 		return null;
 	}
 	
+	public String getDoctorName(int did){
+		try{
+			connectDB connection = new connectDB();
+			String query = "SELECT * FROM `staff` WHERE Staff_ID = "+did+";";
+			connection.resSet = connection.stmt.executeQuery(query);
+			
+			if(connection.resSet.next()){
+				return connection.resSet.getString("Name");
+			}
+		}catch(SQLException se){
+		      se.printStackTrace();
+		} catch (Exception ex) {
+			System.out.println("ERROR" + ex);
+		};
+		
+		return null;
+	}
 	
+	public boolean attendRandevou(int rid){
+		
+		try {
+			connectDB connection = new connectDB();
+			String query1= "UPDATE randevou SET  Append = 1 WHERE Randevou_ID = "+rid+";";
+					System.out.println(query1);
+			connection.stmt.executeUpdate(query1); 
+			return true;
+		}catch(SQLException se){
+		      //Handle errors for JDBC
+		      se.printStackTrace();
+		} catch (Exception ex) {
+			System.out.println("ERROR" + ex);
+		};
+		return false;
+	}
 
 
 }

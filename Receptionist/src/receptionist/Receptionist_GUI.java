@@ -88,18 +88,17 @@ public class Receptionist_GUI extends JFrame {
 				
 			}
 		});
-//		btnListOfPatients.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent arg0) {
-//				Patient_list frame =new Patient_list(ID);
-//				frame.setVisible(true);
-//				setVisible(false);
-//			}
-//		});
 		btnListOfPatients.setBounds(104, 102, 181, 28);
 		panel_1.add(btnListOfPatients);
 		
 		JButton btnListOfRandevous = new JButton("List Of Randevous");
+		btnListOfRandevous.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				randevouList frame = new randevouList(ID);
+				frame.setVisible(true);
+				setVisible(false);
+			}
+		});
 		btnListOfRandevous.setBounds(104, 161, 181, 28);
 		panel_1.add(btnListOfRandevous);
 		
