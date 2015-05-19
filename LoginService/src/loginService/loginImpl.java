@@ -1,7 +1,14 @@
 package loginService;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import dataBaseConnect.connectDB;
 import loginModel.loginFunction;
@@ -32,6 +39,8 @@ public class loginImpl implements loginFunction {
 						a[0]=3;
 					if (connection.resSet.getInt("Medical")==1) 
 						a[0]=4;
+					
+					WriteFile(connection.resSet.getString(1),connection.resSet.getString(2));
 				}
 				else{
 					a[0]=-1;
@@ -53,5 +62,24 @@ public class loginImpl implements loginFunction {
 		
 		return null;
 	}
+	
+	
+	
+	
+	static void WriteFile(String id,String name){
+		
+		String timeStamp = new SimpleDateFormat("yyyy/MM/dd_HH:mm:ss").format(Calendar.getInstance().getTime());
+		try {
+          PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("logFile.txt", true)));
+          out.println(id +" "+name+" "+timeStamp);
+          out.close();
+
+	    } catch ( IOException e ) {
+	       e.printStackTrace();
+	    }
+        
+        
+	}
+	
 
 }
