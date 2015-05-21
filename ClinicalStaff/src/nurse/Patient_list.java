@@ -59,7 +59,7 @@ public class Patient_list extends JFrame {
 	 */
 	public Patient_list(int ID) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 539, 457);
+		setBounds(100, 100, 536, 457);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -76,7 +76,7 @@ public class Patient_list extends JFrame {
 		panel_1.setLayout(null);
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 128)));
 		panel_1.setBackground(new Color(173, 216, 230));
-		panel_1.setBounds(26, 30, 476, 368);
+		panel_1.setBounds(26, 30, 459, 349);
 		panel.add(panel_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -126,9 +126,9 @@ public class Patient_list extends JFrame {
 				if (l.contains(no)){
 					
 				}
-//				GUI_Patients_Edit frame = new GUI_Patients_Edit(ID, no);
-//				frame.setVisible(true);
-//				setVisible(false);
+				patiendRecord frame = new patiendRecord(no);
+				frame.setVisible(true);
+				setVisible(false);
 				
 			}
 		});
@@ -138,18 +138,5 @@ public class Patient_list extends JFrame {
 		JLabel lblSelectPatientNumber = new JLabel("Select Patient Number:");
 		lblSelectPatientNumber.setBounds(20, 291, 149, 29);
 		panel_1.add(lblSelectPatientNumber);
-		
-		JButton btnNewButton = new JButton("Back");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-//				General frame = new General(ID);
-//				frame.setVisible(true);
-//				setVisible(false);
-				
-			}
-		});
-		btnNewButton.setBounds(320, 334, 101, 23);
-		panel_1.add(btnNewButton);
 	}
 }

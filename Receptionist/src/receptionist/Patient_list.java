@@ -30,6 +30,7 @@ import javax.swing.JTable;
 
 
 
+
 import receptionistFactory.receptionistFactory;
 import receptionistModel.receptionistFunctions;
 
@@ -180,9 +181,9 @@ public class Patient_list extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-//				General frame = new General(ID);
-//				frame.setVisible(true);
-//				setVisible(false);
+				Receptionist_GUI frame = new Receptionist_GUI(ID);
+				frame.setVisible(true);
+				setVisible(false);
 				
 			}
 		});

@@ -6,6 +6,8 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: dataBaseConnect,
  doctorsModel,
+ javax.mail;version="1.4.0",
+ javax.mail.internet;version="1.4.0",
  nurseModel
 Export-Package: doctorFactory,
  nurseFactory

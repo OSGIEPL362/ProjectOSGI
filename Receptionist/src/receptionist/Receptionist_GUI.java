@@ -30,7 +30,7 @@ public class Receptionist_GUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Receptionist_GUI frame = new Receptionist_GUI(1);
+					Receptionist_GUI frame = new Receptionist_GUI(125);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

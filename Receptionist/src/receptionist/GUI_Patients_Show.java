@@ -220,8 +220,9 @@ public class GUI_Patients_Show extends JFrame {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//SELECT
-				
-				
+				Receptionist_GUI frame = new Receptionist_GUI(ID);
+				frame.setVisible(true);
+				setVisible(false);
 			}
 		});
 		btnBack.setFont(new Font("Calibri", Font.PLAIN, 14));
