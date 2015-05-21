@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import Health.clinicsList;
 import receptionist.Receptionist_GUI;
 
 import java.awt.event.ActionListener;
@@ -116,15 +117,15 @@ public class login extends JFrame {
 					}
 				}
 				
-				/*if(a[0]==3){     manager
+				if(a[0]==3){    // manager
 					try {
-						doctor_gui frame = new doctor_gui(a[1]);
+						clinicsList frame = new clinicsList ();
 						frame.setVisible(true);
 						setVisible(false);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-				}*/
+				}
 				
 				if(a[0]==4){
 					try {
