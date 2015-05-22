@@ -6,7 +6,7 @@ import org.hamcrest.Factory;
 import org.junit.Test;
 
 
-public class TestForMedicalRecordStaff {
+public class TestMedicalRecordStaff {
 
 	@Test
 	public void checkStringTest() {

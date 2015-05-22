@@ -9,3 +9,4 @@ Import-Package: dataBaseConnect,
  javax.mail.internet;version="1.4.0",
  medicalModel
 Export-Package: medicalFactory
+Require-Bundle: org.junit
